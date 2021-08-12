@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionString": {
+    "Springn2021ExamDB": "Server=DESKTOP-080LU7A; Database=Spring2021Exam ; User Id=PapaDario ; Password=12345;"
+  }
+}

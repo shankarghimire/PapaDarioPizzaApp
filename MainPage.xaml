@@ -14,6 +14,11 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
+        <StackPanel Grid.Row="1">
+            <Button x:Name="btnCheck" Content="Test Connection" FontSize="50" Click="btnCheck_Click"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <TextBlock x:Name="tbtest" FontSize="50" Text="Connection Status:"></TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
