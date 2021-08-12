@@ -79,7 +79,7 @@ namespace PapaDarioPizzaApp
         private void btnLoginAdmin_Click(object sender, RoutedEventArgs e)
         {
             string userName = "Admin";
-            string storedPassword = "123";
+            string storedPassword = "12345";
             string inputPassword = pswPassword.Password.ToString();
             if(tbUserName.Text == userName && inputPassword  == storedPassword)
             {
@@ -91,6 +91,13 @@ namespace PapaDarioPizzaApp
                 //pswPassword.ClearValue();
             }
             
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            tbUserName.Text = "Admin";
+            pswPassword.Password = "12345";
+            chkLogInAsAdmin.IsChecked = true;
         }
 
         //private void btnCheck_Click(object sender, RoutedEventArgs e)

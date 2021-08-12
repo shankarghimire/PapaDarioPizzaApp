@@ -36,5 +36,10 @@ namespace PapaDarioPizzaApp
         {
             Frame.Navigate(typeof(MainPage));
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
