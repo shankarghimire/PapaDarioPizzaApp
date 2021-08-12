@@ -31,19 +31,16 @@ namespace PapaDarioPizzaApp
             this.InitializeComponent();
         }
        
-        private void btnCheck_Click(object sender, RoutedEventArgs e)
-        {
-            string cs = DBConnnection.GetConnectionString();
-            tbtest.Text += cs;
-            using (SqlConnection conn = new SqlConnection(cs))
-            {
-                conn.Open();
-                tbtest.Text = conn.State.ToString();
-            }
-
-
-
-        }
+        //private void btnCheck_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string cs = DBConnnection.GetConnectionString();
+        //    tbtest.Text += cs;
+        //    using (SqlConnection conn = new SqlConnection(cs))
+        //    {
+        //        conn.Open();
+        //        tbtest.Text = conn.State.ToString();
+        //    }
+        //}
         
     }
 }

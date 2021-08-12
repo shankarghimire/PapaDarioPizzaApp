@@ -6,19 +6,149 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="400" Width="800">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1">
-            <Button x:Name="btnCheck" Content="Test Connection" FontSize="50" Click="btnCheck_Click"></Button>
-        </StackPanel>
-        <StackPanel Grid.Row="2">
-            <TextBlock x:Name="tbtest" FontSize="50" Text="Connection Status:"></TextBlock>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" ></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <RelativePanel Grid.Row="0" Margin="10" Background="DarkGreen">
+            <Image Source="Assets/images/p1.jpg"
+                   MaxHeight="250"
+                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+        </RelativePanel>
+        <ScrollViewer Grid.Column="1" Padding="0 20 0 0">
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                </Grid>
+                <TextBlock Grid.Row="0" 
+                           Text="Welcome to Papa Dario Pizza App" 
+                           Margin="10 0 0 0"
+                           FontSize="22"  
+                           FontWeight="Bold"
+                           TextAlignment="Left"                          
+                           FontFamily="Comic Sans MS"
+                           Foreground="Red"/>
+                <TextBlock Grid.Row="1" 
+                           Margin="10 0 0 0"
+                           Text="You are logging in as Guest!" 
+                           FontSize="15"  
+                           FontWeight="Bold"
+                           TextAlignment="Left"                          
+                           FontFamily="Comic Sans MS"
+                           Foreground="Blue"/>
+                <StackPanel Grid.Row="2"  Orientation="Horizontal">
+                    <Button 
+                        x:Name="btnLoginGuest"                        
+                        Margin="10 0 0 0"
+                        Content="Go to Pizza Order Page" 
+                            FontSize="16"
+                        FontWeight="Bold" 
+                        Background="DarkGreen" 
+                        Foreground="White" 
+                        Padding="10 5 10 5"
+                        CornerRadius="5"/>
+                <Button 
+                        x:Name="btnCancel1"                        
+                        Margin="10 0 0 0"
+                        Content="Cancel" 
+                        Width="150"
+                         FontSize="16"
+                        FontWeight="Bold" 
+                        Background="DarkGreen" 
+                        Foreground="White" 
+                        Padding="10 5 10 5"
+                        CornerRadius="5"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 10 0 0 ">
+                    <TextBlock 
+                           Margin="10 0 0 0"
+                           Text="Log in as Admin?" 
+                           FontSize="15"  
+                           FontWeight="Bold"
+                           TextAlignment="Left"                          
+                           FontFamily="Comic Sans MS"
+                           Foreground="Blue"/>
+                    <CheckBox x:Name="chkLogInAsAdmin"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0 10 0 0 ">
+                    <TextBlock 
+                           Margin="10 5 0 0"
+                           Text="User Name" 
+                           FontSize="15"  
+                           FontWeight="Bold"
+                           TextAlignment="Left"                          
+                           FontFamily="Comic Sans MS"
+                           Foreground="Black"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0 0 0 0 ">
+                    <TextBox x:Name="tbUserName"
+                             Margin="10 0 0 0 "
+                             FontSize="16"
+                             BorderThickness="0 0 0 4"
+                             BorderBrush="Green"
+                             Width="350"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0 10 0 0 ">
+                    <TextBlock 
+                           Margin="10 5 0 0"
+                           Text="Password" 
+                           FontSize="15"  
+                           FontWeight="Bold"
+                           TextAlignment="Left"                          
+                           FontFamily="Comic Sans MS"
+                           Foreground="Black"/>
+                </StackPanel>
+                <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="0 0 0 0 ">
+                    <PasswordBox x:Name="pswPassword"
+                             Margin="10 0 0 0 "
+                             FontSize="16"
+                             BorderThickness="0 0 0 4"
+                             BorderBrush="Green"
+                             Width="350"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2"  Orientation="Horizontal">
+                    <Button 
+                        x:Name="btnLoginAdmin"                        
+                        Margin="10 10 0 0"
+                        Content="Log In" 
+                        Width="150"
+                        FontSize="16"
+                        FontWeight="Bold" 
+                        Background="DarkGreen" 
+                        Foreground="White" 
+                        Padding="10 5 10 5"
+                        CornerRadius="5"/>
+                    <Button 
+                        x:Name="btnCancel2"                        
+                        Margin="10 10 0 0"
+                        Content="Cancel" 
+                        Width="150"
+                         FontSize="16"
+                        FontWeight="Bold" 
+                        Background="DarkGreen" 
+                        Foreground="White" 
+                        Padding="10 5 10 5"
+                        CornerRadius="5"/>
+                </StackPanel>
+
+
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
