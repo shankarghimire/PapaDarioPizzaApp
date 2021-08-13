@@ -129,6 +129,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pizza.cs" />
     <Compile Include="PizzaSizePage.xaml.cs">
       <DependentUpon>PizzaSizePage.xaml</DependentUpon>
     </Compile>
@@ -192,6 +193,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <Version>7.0.2</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SqlClient">
       <Version>4.8.2</Version>

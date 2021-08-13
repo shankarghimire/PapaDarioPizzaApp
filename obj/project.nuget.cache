@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sNnZIOKDrLLcWNpA8q+CqmALfOwL4ZKekZSpxR9fBy1y3rfyrupqfTsgsqz3qmRjvE8N6K+1SxFTOqDX8i39Rw==",
+  "dgSpecHash": "7ULB57STM5HaSdixwtDMDPXHdbLBp/ZzbdprwZIaq4Vqv0T2tcJ8Lr9p5Lhcks6trIIQvIvo+FszWjB4VZilNw==",
   "success": true,
   "projectFilePath": "E:\\Sheridan\\Sheridan\\4th Semester-Summer-2021\\Dot Net Technologies using C #-PROG32356\\Final Exam\\PapaDarioPizzaApp\\PapaDarioPizzaApp.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,8 @@
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\microsoft.net.uwpcoreruntimesdk\\2.2.12\\microsoft.net.uwpcoreruntimesdk.2.2.12.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.2\\microsoft.netcore.platforms.3.1.2.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\microsoft.netcore.universalwindowsplatform\\6.2.12\\microsoft.netcore.universalwindowsplatform.6.2.12.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\microsoft.toolkit.uwp.ui.controls.datagrid\\7.0.2\\microsoft.toolkit.uwp.ui.controls.datagrid.7.0.2.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\microsoft.ui.xaml\\2.5.0\\microsoft.ui.xaml.2.5.0.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform\\6.2.12\\runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.6.2.12.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\runtime.win10-arm.microsoft.net.native.compiler\\2.2.10-rel-29722-00\\runtime.win10-arm.microsoft.net.native.compiler.2.2.10-rel-29722-00.nupkg.sha512",
