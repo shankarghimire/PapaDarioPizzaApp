@@ -97,7 +97,7 @@ namespace PapaDarioPizzaApp
         {
             tbUserName.Text = "Admin";
             pswPassword.Password = "12345";
-            chkLogInAsAdmin.IsChecked = true;
+            
         }
 
         //private void btnCheck_Click(object sender, RoutedEventArgs e)

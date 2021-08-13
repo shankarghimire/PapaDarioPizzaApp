@@ -32,14 +32,24 @@ namespace PapaDarioPizzaApp
             
         }
 
-        private void btnTest1_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
-        }
+        //private void btnTest1_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Frame.Navigate(typeof(MainPage));
+        //}
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void btnPizzaSize_Click(object sender, RoutedEventArgs e)
+        {
+            frameAdminPage.Navigate(typeof(PizzaSizePage));
+        }
+
+        private void btnToppings_Click(object sender, RoutedEventArgs e)
+        {
+            frameAdminPage.Navigate(typeof(ToppingsPage));
         }
     }
 }

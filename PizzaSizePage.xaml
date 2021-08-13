@@ -1,0 +1,138 @@
+﻿<Page
+    x:Class="PapaDarioPizzaApp.PizzaSizePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PapaDarioPizzaApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <RelativePanel Grid.Row="0" Margin="5 20 5 20" Grid.Column="0" Grid.ColumnSpan="2" Background="Beige">
+            <TextBlock x:Name="TextBlock_PizzaSizeTitle"
+                       Margin="600 5 0 5" 
+                       Text="Pizza Size"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       ></TextBlock>            
+        </RelativePanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Pizza Id:" 
+                       FontSize="16"
+                       Width="200"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       Padding="5"></TextBlock>
+            <TextBox x:Name="tbPizzaSizeId"
+                     
+                     Width="500"
+                     FontSize="16"
+                     
+                     FontWeight="Bold"
+                     Padding="5"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Pizza Size:" 
+                       FontSize="16"
+                       Width="200"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       Padding="5"></TextBlock>
+            <TextBox x:Name="tbPizzaSize"
+                     
+                     Width="500"
+                     FontSize="16"
+                     
+                     FontWeight="Bold"
+                     Padding="5"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Description:" 
+                       FontSize="16"
+                       Width="200"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       Padding="5"></TextBlock>
+            <TextBox x:Name="tbPizzaDescription"
+                     
+                     Width="500"
+                     FontSize="16"
+                     
+                     FontWeight="Bold"
+                     Padding="5"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Price:" 
+                       FontSize="16"
+                       Width="200"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       Padding="5"></TextBlock>
+            <TextBox x:Name="tbPizzaPrice"
+                    
+                     Width="500"
+                     FontSize="16"
+                     
+                     FontWeight="Bold"
+                     Padding="5"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5"                    
+                    Orientation="Horizontal" 
+                    Margin="150 5 5 5" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btnAddNew"
+                    Content="Add New"
+                    FontSize="18"
+                    FontWeight="bold"
+                    Background="Blue"
+                    Foreground="White"
+                    CornerRadius="5"
+                    Width="150"
+                    Margin="10 5 10 5"
+                    />
+            <Button x:Name="btnUpdate"
+                    Content="Update"
+                    FontSize="18"
+                    FontWeight="bold"
+                    Background="Blue"
+                    Foreground="White"
+                    CornerRadius="5"
+                    Width="150"
+                    Margin="10 5 10 5"
+                    />
+            <Button x:Name="btnDelete"
+                    Content="Delete"
+                    FontSize="18"
+                    FontWeight="bold"
+                    Background="Blue"
+                    Foreground="White"
+                    CornerRadius="5"
+                    Width="150"
+                    Margin="10 5 10 5"
+                    />
+        </StackPanel>
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="1"
+                    Grid.RowSpan="6"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            
+        </StackPanel>
+    </Grid>
+</Page>

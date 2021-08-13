@@ -8,13 +8,68 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
-    <Grid Background="Green">
+    <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" x:Name="btnTest1" Content="Back" FontSize="50" Click="btnTest1_Click" Height="259" Width="750"></Button>
-        <TextBlock Grid.Row="1" Text="Admin Page"  FontSize="50" SelectionChanged="TextBlock_SelectionChanged"></TextBlock>
+
+        <RelativePanel Grid.Row="0" Background="green">
+            <TextBlock
+                x:Name="TextBlock_AppTitle"
+                Margin="600 5 100 5"
+                Text="Papa Dario Pizza App"
+                FontSize="30"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Center"/>
+        </RelativePanel>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
+            <Button x:Name="btnPizzaSize"
+                    Margin="10 5 10 5 "
+                    Content="Pizza Size"
+                    FontSize="20"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="5"
+                    Width="200"
+                    Height="50"
+                    CornerRadius="15" Click="btnPizzaSize_Click"/>
+            <Button x:Name="btnToppings"
+                    Margin="10 5 10 5 "
+                    Content="Toppings"
+                    FontSize="20"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="5"
+                    Width="200"
+                    Height="50"
+                    CornerRadius="15" Click="btnToppings_Click"/>
+        </StackPanel>
+        <Frame Grid.Row="2" 
+               x:Name="frameAdminPage"
+               Background="Azure"
+               Width="1450"
+               Height="800"            
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center">
+            
+        </Frame>
+        <RelativePanel Grid.Row="3" Background="green">
+            <TextBlock
+                x:Name="TextBlock_FooterInfo"
+                Margin="600 0 0 0"
+                Padding="0 5 0 0"
+                Text="Copy Right @Papa Dario Pizza:2021"
+                FontSize="12"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Center"/>
+        </RelativePanel>
     </Grid>
 </Page>
