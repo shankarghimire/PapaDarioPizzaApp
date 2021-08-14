@@ -94,7 +94,11 @@
                      Padding="5"/>
         </StackPanel>
         <StackPanel Grid.Row="5"                    
-                    Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="748">
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Width="748"
+                    Padding="80, 0 , 0,0">
             <Button x:Name="btnAddNew"
                     Content="Add New"
                     FontSize="18"
@@ -103,7 +107,7 @@
                     Foreground="White"
                     CornerRadius="5"
                     Width="150"
-                    Margin="10 5 10 5" Click="btnAddNew_Click"
+                    Margin="5" Click="btnAddNew_Click"
                     />
             <Button x:Name="btnUpdate"
                     Content="Update"
@@ -113,7 +117,7 @@
                     Foreground="White"
                     CornerRadius="5"
                     Width="150"
-                    Margin="10 5 10 5" Click="btnUpdate_Click"
+                    Margin="5" Click="btnUpdate_Click"
                     />
             <Button x:Name="btnDelete"
                     Content="Delete"
@@ -123,7 +127,7 @@
                     Foreground="White"
                     CornerRadius="5"
                     Width="150"
-                    Margin="10 5 10 5" Click="btnDelete_Click"
+                    Margin="5" Click="btnDelete_Click"
                     />
             <Button x:Name="btnRefrsh"
                     Content="Refresh"
@@ -133,7 +137,7 @@
                     Foreground="White"
                     CornerRadius="5"
                     Width="150"
-                    Margin="10 5 10 5" Click="btnRefrsh_Click" 
+                    Margin="5" Click="btnRefrsh_Click" 
                     />
         </StackPanel>
         <StackPanel Grid.Row="1" 

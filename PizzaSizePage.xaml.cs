@@ -40,9 +40,22 @@ namespace PapaDarioPizzaApp
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            tbPizzaSizeId.IsEnabled = false;
-            dataGridViewPizzaSize.IsReadOnly = true;
-            LoadDatatoUI();
+            try
+            {
+                tbPizzaSizeId.IsEnabled = false;
+                dataGridViewPizzaSize.IsReadOnly = true;
+                LoadDatatoUI();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+                
+            }
+            finally
+            {
+
+            }
+           
         }
         private void LoadDatatoUI()
         {
@@ -90,23 +103,47 @@ namespace PapaDarioPizzaApp
 
         private  void dataGridViewPizzaSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int id = dataGridViewPizzaSize.SelectedIndex;
-            Pizza temp = new Pizza();
-            temp = (Pizza)dataGridViewPizzaSize.SelectedItem;
-            //messageDialog = new MessageDialog("Select Item : " + (temp.ID + ", "  + temp.PizzaSize + ", " + temp.Description + ", " + temp.Price));
-            //messageDialog.ShowAsync();
-            if(temp != null)
+            try
             {
-                LoadCurrentRecord(temp);
+                int id = dataGridViewPizzaSize.SelectedIndex;
+                Pizza temp = new Pizza();
+                temp = (Pizza)dataGridViewPizzaSize.SelectedItem;
+                //messageDialog = new MessageDialog("Select Item : " + (temp.ID + ", "  + temp.PizzaSize + ", " + temp.Description + ", " + temp.Price));
+                //messageDialog.ShowAsync();
+                if (temp != null)
+                {
+                    LoadCurrentRecord(temp);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+            finally
+            {
+
+            }
+            
            
         }
         private void LoadCurrentRecord(Pizza currentPizza)
         {
-            tbPizzaSizeId.Text = currentPizza.ID.ToString();
-            tbPizzaSize.Text = currentPizza.PizzaSize.ToString();
-            tbPizzaDescription.Text = currentPizza.Description.ToString();
-            tbPizzaPrice.Text = currentPizza.Price.ToString();
+            try
+            {
+                tbPizzaSizeId.Text = currentPizza.ID.ToString();
+                tbPizzaSize.Text = currentPizza.PizzaSize.ToString();
+                tbPizzaDescription.Text = currentPizza.Description.ToString();
+                tbPizzaPrice.Text = currentPizza.Price.ToString();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+            finally
+            {
+
+            }
+           
         }
 
         private async void btnAddNew_Click(object sender, RoutedEventArgs e)
@@ -117,7 +154,18 @@ namespace PapaDarioPizzaApp
             string message = "";
             string caption = "";
 
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+            finally
+            {
+
+            }
 
             if (pizzaSize == "")
             {
@@ -204,21 +252,33 @@ namespace PapaDarioPizzaApp
         
         private async void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if(tbPizzaSize.Text == "" || tbPizzaDescription.Text == "" || tbPizzaPrice.Text == "")
+            try
             {
-                MessageDialog messageDialog = new MessageDialog("Some text fields are missing!", "Error");
-                await messageDialog.ShowAsync();
-                return;
-            }
-           
-            int id = Convert.ToInt32(tbPizzaSizeId.Text);
-            string pizzaSize = tbPizzaSize.Text;
-            string pizzaDescription = tbPizzaDescription.Text;
-            double pizzaPirce = Convert.ToDouble(tbPizzaPrice.Text);
-            Pizza pizza = new Pizza(id, pizzaSize, pizzaDescription, pizzaPirce);
-            UpdatePizza(pizza);
+                if (tbPizzaSize.Text == "" || tbPizzaDescription.Text == "" || tbPizzaPrice.Text == "")
+                {
+                    MessageDialog messageDialog = new MessageDialog("Some text fields are missing!", "Error");
+                    await messageDialog.ShowAsync();
+                    return;
+                }
 
-            LoadDataToDataGrid();
+                int id = Convert.ToInt32(tbPizzaSizeId.Text);
+                string pizzaSize = tbPizzaSize.Text;
+                string pizzaDescription = tbPizzaDescription.Text;
+                double pizzaPirce = Convert.ToDouble(tbPizzaPrice.Text);
+                Pizza pizza = new Pizza(id, pizzaSize, pizzaDescription, pizzaPirce);
+                UpdatePizza(pizza);
+
+                LoadDataToDataGrid();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+            finally
+            {
+
+            }
+            
 
         }
 
@@ -270,21 +330,32 @@ namespace PapaDarioPizzaApp
 
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
-            if (tbPizzaSize.Text == "" || tbPizzaDescription.Text == "" || tbPizzaPrice.Text == "")
+            try
             {
-                MessageDialog messageDialog = new MessageDialog("Some text fields are missing!", "Error");
-                await messageDialog.ShowAsync();
-                return;
-            }
+                if (tbPizzaSize.Text == "" || tbPizzaDescription.Text == "" || tbPizzaPrice.Text == "")
+                {
+                    MessageDialog messageDialog = new MessageDialog("Some text fields are missing!", "Error");
+                    await messageDialog.ShowAsync();
+                    return;
+                }
 
-            int id = Convert.ToInt32(tbPizzaSizeId.Text);
-            string pizzaSize = tbPizzaSize.Text;
-            string pizzaDescription = tbPizzaDescription.Text;
-            double pizzaPirce = Convert.ToDouble(tbPizzaPrice.Text);
-            Pizza pizza = new Pizza(id, pizzaSize, pizzaDescription, pizzaPirce);
-            DeletePizza(pizza);
-            LoadDataToDataGrid();
+                int id = Convert.ToInt32(tbPizzaSizeId.Text);
+                string pizzaSize = tbPizzaSize.Text;
+                string pizzaDescription = tbPizzaDescription.Text;
+                double pizzaPirce = Convert.ToDouble(tbPizzaPrice.Text);
+                Pizza pizza = new Pizza(id, pizzaSize, pizzaDescription, pizzaPirce);
+                DeletePizza(pizza);
+                LoadDataToDataGrid();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+            finally
+            {
+
+            }
+           
         }
 
          async void DeletePizza(Pizza pizza)
@@ -337,8 +408,21 @@ namespace PapaDarioPizzaApp
 
         private void btnRefrsh_Click(object sender, RoutedEventArgs e)
         {
-            //LoadDatatoUI();
-            LoadDataToDataGrid();
+            try
+            {
+                //LoadDatatoUI();
+                LoadDataToDataGrid();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+                
+            }
+            finally
+            {
+
+            }
+           
         }
         private void LoadDataToDataGrid()
         {
