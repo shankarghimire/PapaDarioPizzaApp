@@ -33,6 +33,7 @@
                        FontWeight="Bold"
                        />
         </RelativePanel>
+        
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
             <TextBlock Text="Pizza Id:" 
                        FontSize="16"
@@ -48,6 +49,7 @@
                      FontWeight="Bold"
                      Padding="5"/>
         </StackPanel>
+        
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
             <TextBlock Text="Pizza Size:" 
                        FontSize="16"

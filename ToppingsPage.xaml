@@ -8,7 +8,132 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="Cyan">
-        <TextBlock Text="Toppings" FontSize="100"></TextBlock>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <RelativePanel Grid.Row="0" Margin="5 20 5 20" Grid.Column="0" Grid.ColumnSpan="2" Background="Beige">
+            <TextBlock x:Name="TextBlock_PizzaToppingTitle"
+                       Margin="600 5 0 5" 
+                       Text="Pizza Toppings"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       />
+        </RelativePanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Topping Id:" 
+                       FontSize="16"
+                       Width="200"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       Padding="5"/>
+            <TextBox x:Name="tbToppingId"                
+                     Width="500"
+                     FontSize="16"                     
+                     FontWeight="Bold"
+                     Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Topping Name:" 
+                       FontSize="16"
+                       Width="200"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       Padding="5"/>
+            <TextBox x:Name="tbToppingName"                     
+                     Width="500"
+                     FontSize="16"                    
+                     FontWeight="Bold"
+                     Padding="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Description:" 
+                       FontSize="16"
+                       Width="200"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       Padding="5"/>
+            <TextBox x:Name="tbToppingDescription"                    
+                     Width="500"
+                     FontSize="16"                    
+                     FontWeight="Bold"
+                     Padding="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Price:" 
+                       FontSize="16"
+                       Width="200"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       Padding="5"/>
+            <TextBox x:Name="tbToppingPrice"                   
+                     Width="500"
+                     FontSize="16"                    
+                     FontWeight="Bold"
+                     Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5"                    
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Width="748"
+                    Padding="80, 0 , 0,0">
+            <Button x:Name="btnAddNew"
+                    Content="Add New"
+                    FontSize="18"
+                    FontWeight="bold"
+                    Background="Blue"
+                    Foreground="White"
+                    CornerRadius="5"
+                    Width="150"
+                    Margin="5" Click="btnAddNew_Click" 
+                    />
+            <Button x:Name="btnUpdate"
+                    Content="Update"
+                    FontSize="18"
+                    FontWeight="bold"
+                    Background="Blue"
+                    Foreground="White"
+                    CornerRadius="5"
+                    Width="150"
+                    Margin="5" Click="btnUpdate_Click" 
+                    />
+            <Button x:Name="btnDelete"
+                    Content="Delete"
+                    FontSize="18"
+                    FontWeight="bold"
+                    Background="Blue"
+                    Foreground="White"
+                    CornerRadius="5"
+                    Width="150"
+                    Margin="5" Click="btnDelete_Click" 
+                    />
+            <Button x:Name="btnRefrsh"
+                    Content="Refresh"
+                    FontSize="18"
+                    FontWeight="bold"
+                    Background="Blue"
+                    Foreground="White"
+                    CornerRadius="5"
+                    Width="150"
+                    Margin="5" Click="btnRefrsh_Click"  
+                    />
+        </StackPanel>
+
     </Grid>
 </Page>

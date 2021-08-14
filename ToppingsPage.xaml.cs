@@ -26,5 +26,25 @@ namespace PapaDarioPizzaApp
         {
             this.InitializeComponent();
         }
+
+        private void btnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRefrsh_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
