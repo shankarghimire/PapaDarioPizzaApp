@@ -31,6 +31,7 @@ namespace PapaDarioPizzaApp
         private Pizza pizza;
 
         MessageDialog messageDialog;
+
         public PizzaSizePage()
         {
             this.InitializeComponent();
