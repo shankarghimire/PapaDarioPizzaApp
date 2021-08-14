@@ -157,7 +157,48 @@ namespace PapaDarioPizzaApp
 
             try
             {
+                if (pizzaSize == "")
+                {
+                    message = "Pizza Size Cannot be blank!";
+                    caption = "Data Validation Error";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    tbPizzaSize.Focus(FocusState.Programmatic);
+                }
+                else if (pizzaDescription == "")
+                {
+                    message = "Pizza Descriptio Cannot be blank!";
+                    caption = "Data Validation Error";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    tbPizzaDescription.Focus(FocusState.Programmatic);
+                }
+                else if (!double.TryParse(tbPizzaPrice.Text, out pizzaPrice))
+                {
+                    message = "Pizza Price Must be numeric value!";
+                    caption = "Data Validation Error";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    tbPizzaPrice.Focus(FocusState.Programmatic);
+                    //tbPizzaPrice.Text = "";
+                }
+                else
+                {
+                    pizzaSize = tbPizzaSize.Text;
+                    pizzaDescription = tbPizzaDescription.Text;
+                    pizzaPrice = Convert.ToDouble(tbPizzaPrice.Text);
 
+                    Pizza pizza = new Pizza();
+                    pizza.PizzaSize = pizzaSize;
+                    pizza.Description = pizzaDescription;
+                    pizza.Price = pizzaPrice;
+
+                    //call method to insert data into database table
+                    InsertPizza(pizza);
+
+                    LoadDataToDataGrid();
+
+                }
             }
             catch (Exception ex)
             {
@@ -168,48 +209,7 @@ namespace PapaDarioPizzaApp
 
             }
 
-            if (pizzaSize == "")
-            {
-                message = "Pizza Size Cannot be blank!";
-                caption = "Data Validation Error";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                tbPizzaSize.Focus(FocusState.Programmatic);
-            }
-            else if (pizzaDescription == "")
-            {
-                message = "Pizza Descriptio Cannot be blank!";
-                caption = "Data Validation Error";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                tbPizzaDescription.Focus(FocusState.Programmatic);
-            }
-            else if (!double.TryParse(tbPizzaPrice.Text, out pizzaPrice))
-            {
-                message = "Pizza Price Must be numeric value!";
-                caption = "Data Validation Error";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                tbPizzaPrice.Focus(FocusState.Programmatic);
-                //tbPizzaPrice.Text = "";
-            }
-            else
-            {
-                pizzaSize = tbPizzaSize.Text;
-                pizzaDescription = tbPizzaDescription.Text;
-                pizzaPrice = Convert.ToDouble(tbPizzaPrice.Text);
-
-                Pizza pizza = new Pizza();
-                pizza.PizzaSize = pizzaSize;
-                pizza.Description = pizzaDescription;
-                pizza.Price = pizzaPrice;
-
-                //call method to insert data into database table
-                InsertPizza(pizza);
-
-                LoadDataToDataGrid();
-
-            }
+            
         }
         async void InsertPizza(Pizza pizza)
         {
@@ -333,9 +333,9 @@ namespace PapaDarioPizzaApp
         {
             try
             {
-                if (tbPizzaSize.Text == "" || tbPizzaDescription.Text == "" || tbPizzaPrice.Text == "")
+                if (tbPizzaSizeId.Text == "" )
                 {
-                    MessageDialog messageDialog = new MessageDialog("Some text fields are missing!", "Error");
+                    MessageDialog messageDialog = new MessageDialog("ID text fields is missing!", "Error");
                     await messageDialog.ShowAsync();
                     return;
                 }
@@ -359,7 +359,7 @@ namespace PapaDarioPizzaApp
            
         }
 
-         async void DeletePizza(Pizza pizza)
+        private async void DeletePizza(Pizza pizza)
         {
 
             string connectionString = DBConnnection.GetConnectionString();
