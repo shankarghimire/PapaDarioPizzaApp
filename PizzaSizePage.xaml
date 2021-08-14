@@ -147,14 +147,22 @@
                     Grid.RowSpan="5"
                     Orientation="Horizontal"
                     VerticalAlignment="Top"
-                    HorizontalAlignment="Left" Height="206" Width="564" Margin="105,17,0,0">
+                    HorizontalAlignment="Left" 
+                    Height="206" Width="564" 
+                    Margin="105,17,0,0"
+                    
+                    >
             <Custom:DataGrid 
                 x:Name="dataGridViewPizzaSize"
-            Grid.Column="1"     
-             Margin="10,10,0,0" 
-            Grid.Row="1" 
-             Grid.RowSpan="6"   
-                AutoGenerateColumns="True" SelectionChanged="dataGridViewPizzaSize_SelectionChanged" BackgroundSizing="InnerBorderEdge" GridLinesVisibility="All" IsReadOnly="True"             
+                Grid.Column="1"     
+                Margin="10,10,0,0" 
+                Grid.Row="1" 
+                Grid.RowSpan="6"   
+                AutoGenerateColumns="True" 
+                SelectionChanged="dataGridViewPizzaSize_SelectionChanged" 
+                BackgroundSizing="InnerBorderEdge"
+                GridLinesVisibility="All" 
+                IsReadOnly="True"             
             />
         </StackPanel>
     </Grid>
