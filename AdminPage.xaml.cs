@@ -51,5 +51,10 @@ namespace PapaDarioPizzaApp
         {
             frameAdminPage.Navigate(typeof(ToppingsPage));
         }
+
+        private void btnGotoHome_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
     }
 }

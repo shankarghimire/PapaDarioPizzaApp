@@ -149,7 +149,7 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left" 
                     Height="206" Width="564" 
-                    Margin="105,17,0,0"
+                    Margin="10,17,0,0"
                     
                     >
             <Custom:DataGrid 

@@ -27,9 +27,32 @@
                 Foreground="White"
                 TextAlignment="Center"/>
         </RelativePanel>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-            <Button x:Name="btnPizzaSize"
-                    Margin="10 2 10 2 "
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                   >
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                <Button x:Name="btnGotoHome"
+                    Content="Goto Login Page"
+                     Margin="20 2 10 2 "               
+                    FontSize="20"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="0"
+                    Width="200"
+                    Height="40"
+                    CornerRadius="5" Click="btnGotoHome_Click"    
+                        />
+            </StackPanel>
+            
+            <StackPanel  
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Orientation="Horizontal" >
+                <Button x:Name="btnPizzaSize"
+                    Margin="450 2 10 2 "
                     Content="Pizza Size"
                     FontSize="20"
                     Background="Blue"
@@ -39,7 +62,7 @@
                     Width="200"
                     Height="40"
                     CornerRadius="5" Click="btnPizzaSize_Click"/>
-            <Button x:Name="btnToppings"
+                <Button x:Name="btnToppings"
                     Margin="10 2 10 2 "
                     Content="Toppings"
                     FontSize="20"
@@ -50,7 +73,10 @@
                     Width="200"
                     Height="40"
                     CornerRadius="5" Click="btnToppings_Click"/>
+            </StackPanel>
+
         </StackPanel>
+       
         <Frame Grid.Row="2" 
                x:Name="frameAdminPage"
                Background="Azure"
