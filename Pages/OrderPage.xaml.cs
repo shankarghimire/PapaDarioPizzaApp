@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,9 +23,22 @@ namespace PapaDarioPizzaApp.Pages
     /// </summary>
     public sealed partial class OrderPage : Page
     {
+        MessageDialog messageDialog;
+        private PizzaOrder currentPizzaOrder;
+        private List<PizzaOrder> pizzaOrderList;
+        private int serialNumber;
+        private Dictionary<string, double> sizeDictionary;
+        private Dictionary<string, double> toppingDictionary;
         public OrderPage()
         {
             this.InitializeComponent();
+            currentPizzaOrder = new PizzaOrder();
+            pizzaOrderList = new List<PizzaOrder>();
+
+            sizeDictionary = new Dictionary<string, double>();
+            toppingDictionary = new Dictionary<string, double>();
+
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -32,6 +46,256 @@ namespace PapaDarioPizzaApp.Pages
             tbCustomerId.IsEnabled = false;
             tbCustomerName.IsEnabled = false;
             tbDeliveryAddress.IsEnabled = false;
+
+            this.PizzaOrderDate.Date = DateTime.Now;
+
+                           
+            DisableUIElements();
+        }
+
+        private void chkDelivery_Checked(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void chkDelivery_Click(object sender, RoutedEventArgs e)
+        {
+            if (chkDelivery.IsChecked == true)
+            {
+                tbDeliveryAddress.IsEnabled = true;
+            }
+            else
+            {
+                tbDeliveryAddress.IsEnabled = false;
+            }
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+
+        }
+        private void DisableUIElements()
+        {
+            tbCustomerId.IsEnabled = false;
+            tbCustomerName.IsEnabled = false;
+            tbPhoneNumber.IsEnabled = false;
+            tbDeliveryAddress.IsEnabled = false;
+
+            rbSmall.IsEnabled =  false;
+            rbMedium.IsEnabled = false;
+            rbLarge.IsEnabled = false;
+
+            chkPepperoni.IsEnabled = false;
+            chkMushrooms.IsEnabled = false;
+            chkOnion.IsEnabled = false;
+            chkSausage.IsEnabled = false;
+            chkBacon.IsEnabled = false;
+            chkExtraCheese.IsEnabled = false;
+            chkBlackOlives.IsEnabled = false;
+            chkGreenPeppers.IsEnabled = false;
+            chkPineapple.IsEnabled = false;
+            chkSpiniach.IsEnabled = false;
+            chkBroccoli.IsEnabled = false;
+
+            chkDelivery.IsEnabled = false;
+
+            //Disable Buttons
+            btnAdd.IsEnabled = false;
+            btnUpdate.IsEnabled = false;
+            btnDelete.IsEnabled = false;
+            btnReset.IsEnabled = false;
+            btnSubmitOrder.IsEnabled = false;
+            btnPrintBill.IsEnabled = false;
+        }
+        private void EnableUIElements()
+        {
+            //tbCustomerId.IsEnabled = true;
+            //tbCustomerName.IsEnabled = true;
+            tbPhoneNumber.IsEnabled = true;
+            //tbDeliveryAddress.IsEnabled = true;
+            //orderDate.IsEnabled = false;
+
+            chkDelivery.IsEnabled = true;
+
+
+            rbSmall.IsEnabled = true;
+            rbMedium.IsEnabled = true;
+            rbLarge.IsEnabled = true;
+
+            chkPepperoni.IsEnabled = true;
+            chkMushrooms.IsEnabled = true;
+            chkOnion.IsEnabled = true;
+            chkSausage.IsEnabled = true;
+            chkBacon.IsEnabled = true;
+            chkExtraCheese.IsEnabled = true;
+            chkBlackOlives.IsEnabled = true;
+            chkGreenPeppers.IsEnabled = true;
+            chkPineapple.IsEnabled = true;
+            chkSpiniach.IsEnabled = true;
+            chkBroccoli.IsEnabled = true;
+
+            //Disable Buttons
+            btnAdd.IsEnabled = true;
+            btnUpdate.IsEnabled = false;
+            btnDelete.IsEnabled = false;
+            btnReset.IsEnabled = false;
+            btnSubmitOrder.IsEnabled = false;
+            btnPrintBill.IsEnabled = false;
+        }
+
+        private void btnNewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            serialNumber = 0;
+            EnableUIElements();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            btnUpdate.IsEnabled = true;
+            btnDelete.IsEnabled = true;
+
+
+            CheckDataValidation();
+        }
+        private async void CheckDataValidation()
+        {
+            string message = "";
+            string caption = "Data Validation Error";
+
+            //if(this.PizzaOrderDate.Date == null)
+            //{
+            //    message = "You should select the Date to order !";
+            //    messageDialog = new MessageDialog(message, caption);
+            //    await messageDialog.ShowAsync();
+            //    return;
+            //}
+
+
+            //var orderDate = this.PizzaOrderDate.Date;
+            //if(orderDate < DateTime.Now)
+            //{
+            //    message = "Order Date cannot be past date! !";
+            //    messageDialog = new MessageDialog(message, caption);
+            //    await messageDialog.ShowAsync();
+            //    this.PizzaOrderDate.Focus(FocusState.Programmatic );
+
+            //    return;
+            //}
+            if(tbPhoneNumber.Text == "")
+            {
+                message = "Phone number is missing!";
+                messageDialog = new MessageDialog(message, caption);
+                await messageDialog.ShowAsync();
+                this.tbPhoneNumber.Focus(FocusState.Programmatic);
+                return;
+            }
+            if (rbLarge.IsChecked == false && rbSmall.IsChecked == false && rbMedium.IsChecked == false)
+            {
+                message = "You should select at lest one size for the pizza!";
+                messageDialog = new MessageDialog(message, caption);
+                await messageDialog.ShowAsync();
+                return;
+            }
+
+            if(chkPepperoni.IsChecked == false && 
+                chkMushrooms.IsChecked == false &&
+                chkOnion.IsChecked == false &&
+                chkSausage.IsChecked == false &&
+                chkBacon.IsChecked == false &&
+                chkExtraCheese.IsChecked == false &&
+                chkBlackOlives.IsChecked == false &&
+                chkGreenPeppers.IsChecked == false &&
+                chkPineapple.IsChecked == false &&
+                chkSpiniach.IsChecked == false &&
+                chkBroccoli.IsChecked == false
+                )
+            {
+
+                message = "You should select at lest one Topping!";
+                messageDialog = new MessageDialog(message, caption);
+                await messageDialog.ShowAsync();
+                return;
+            }
+
+
+
+            PizzaOrder temp = new PizzaOrder();
+            temp.OrderNumber = 1;
+            //temp.OrderDate = Convert.ToDateTime(PizzaOrderDate.Date);
+            serialNumber += 1;
+            temp.SerialNumber = serialNumber ;
+            //temp.CustomerId = Convert.ToInt32( tbCustomerId.Text);
+            temp.PhoneNumber = tbPhoneNumber.Text;
+
+            if(rbSmall.IsChecked == true)
+            {
+                temp.Size = "Small";
+            }else if(rbMedium.IsChecked == true)
+            {
+                temp.Size = "Medium";
+            }
+            else if(rbLarge.IsChecked == true)
+            {
+                temp.Size = "Large";
+            }
+
+            //Toppings
+            if (chkPepperoni.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Pepperoni", 1.5);
+                temp.Toppings = "Pepperoni";
+            }
+            if(chkMushrooms.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Mushrooms", 1.5);
+                temp.Toppings +=" Mushrooms";
+            }
+             if (chkOnion.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Onion", 1.5);
+                temp.Toppings += " Onion";
+            }
+            if (chkSausage.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Sausage", 1.5);
+                temp.Toppings += " Sausage";
+            }
+            if (chkBacon.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Bacon", 1.5);
+                temp.Toppings += " Bacon";
+            }
+           if (chkExtraCheese.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Extra Cheese", 1.5);
+                temp.Toppings += " Extra Cheese";
+            }
+            if (chkBlackOlives.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Black Olives", 1.5);
+                temp.Toppings += " Black Olives";
+            }
+             if (chkPineapple.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Pineapple", 1.5);
+                temp.Toppings += " Pineapple";
+            }
+             if (chkSpiniach.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Spiniach", 1.5);
+                temp.Toppings += " Spiniach";
+            }
+            if (chkBroccoli.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Broccoli", 1.5);
+                temp.Toppings += " Broccoli";
+            }
+            dataGridViewOrder.ItemsSource = null;
+            pizzaOrderList.Add(temp);
+            dataGridViewOrder.ItemsSource = pizzaOrderList;
+
         }
     }
 }

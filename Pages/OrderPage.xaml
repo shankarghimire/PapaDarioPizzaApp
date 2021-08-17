@@ -53,7 +53,7 @@
                        Width="110"
                        TextAlignment="Right"
                        />
-            <DatePicker x:Name="orderDate"/>
+            <DatePicker x:Name="PizzaOrderDate"/>
         </StackPanel>
         <StackPanel Grid.Row="2" 
                     Grid.Column="0"
@@ -89,7 +89,7 @@
                        Width="110"
                        TextAlignment="Right"
                         Padding="2"/>
-            <CheckBox x:Name="chkDelivery"/>
+            <CheckBox x:Name="chkDelivery" Checked="chkDelivery_Checked" Click="chkDelivery_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="5"
                     Grid.Column="0"
@@ -124,7 +124,7 @@
                     Background="Blue"
                     Foreground="White"
                     FontWeight="bold"
-                    CornerRadius="5"/>
+                    CornerRadius="5" Click="btnAdd_Click"/>
             <Button x:Name="btnUpdate" 
                     Content="Update"
                     Width="100" Margin="5,0,5,0"
@@ -145,7 +145,7 @@
                     Background="Blue"
                     Foreground="White"
                     FontWeight="bold"
-                    CornerRadius="5"/>
+                    CornerRadius="5" Click="btnReset_Click"/>
         </StackPanel>
         <Border BorderThickness="2"
                 Grid.Row="1"
@@ -153,6 +153,7 @@
                 Grid.RowSpan="4"
                 BorderBrush="Gold"
                 Width="250"
+                Padding="10"
                 HorizontalAlignment="Left">
 
 
@@ -308,7 +309,7 @@
                     FontWeight="Bold"
                     CornerRadius="5"
                     Width="110"
-                    Margin="10,0,10,0"/>
+                    Margin="10,0,10,0" Click="btnNewOrder_Click"/>
         </StackPanel>
     </Grid>
 </Page>

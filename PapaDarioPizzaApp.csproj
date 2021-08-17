@@ -142,6 +142,7 @@
       <DependentUpon>TestPage1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pizza.cs" />
+    <Compile Include="PizzaOrder.cs" />
     <Compile Include="PizzaSizePage.xaml.cs">
       <DependentUpon>PizzaSizePage.xaml</DependentUpon>
     </Compile>
