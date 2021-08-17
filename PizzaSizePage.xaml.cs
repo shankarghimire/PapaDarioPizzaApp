@@ -197,7 +197,6 @@ namespace PapaDarioPizzaApp
                     InsertPizza(pizza);
 
                     LoadDataToDataGrid();
-
                 }
             }
             catch (Exception ex)
@@ -207,9 +206,7 @@ namespace PapaDarioPizzaApp
             finally
             {
 
-            }
-
-            
+            }           
         }
         async void InsertPizza(Pizza pizza)
         {

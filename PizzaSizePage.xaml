@@ -25,6 +25,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        
         <RelativePanel Grid.Row="0" Margin="5 20 5 20" Grid.Column="0" Grid.ColumnSpan="2" Background="Beige">
             <TextBlock x:Name="TextBlock_PizzaSizeTitle"
                        Margin="600 5 0 5" 

@@ -27,6 +27,7 @@
                 Foreground="White"
                 TextAlignment="Center"/>
         </RelativePanel>
+        
         <StackPanel Grid.Row="1" 
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
