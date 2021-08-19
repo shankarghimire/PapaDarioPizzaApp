@@ -8,8 +8,8 @@ namespace PapaDarioPizzaApp
 {
     class User
     {
-        private int UserId { get; set; }
-        private string UserName { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
         private string UserPassword { get; set; }
         public User() { }
         public User(int userId, string userName, string userPassword)

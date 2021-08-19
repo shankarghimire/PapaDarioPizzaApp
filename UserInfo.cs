@@ -13,6 +13,14 @@ namespace PapaDarioPizzaApp
         {
             LoggedInUser = new User();
         }
+        //public User GetLoggedInUser()
+        //{
+        //    User temp = new User();
+        //    temp.UserId = 12345;
+        //    temp.UserName = User;
+
+        //    return temp;
+        //}
 
 
     }

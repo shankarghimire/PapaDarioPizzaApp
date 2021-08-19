@@ -208,7 +208,7 @@ namespace PapaDarioPizzaApp
 
             }           
         }
-        async void InsertPizza(Pizza pizza)
+        private async void InsertPizza(Pizza pizza)
         {
             string connectionString = DBConnnection.GetConnectionString();
             string query = "Insert Into PizzaSize(PizzaSize, PizzaDescription,Price)" + 

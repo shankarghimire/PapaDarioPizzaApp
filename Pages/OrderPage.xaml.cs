@@ -36,7 +36,7 @@ namespace PapaDarioPizzaApp.Pages
         private List<Topping> toppingList = new List<Topping>();
 
         private int updateId = -1;
-
+        private int newOrderId = -1;
         private double currentPrice = 0;
         //private double currentPizzaRate = 0;
         private double currentPizzaPrice = 0;
@@ -169,6 +169,8 @@ namespace PapaDarioPizzaApp.Pages
 
         private void btnNewOrder_Click(object sender, RoutedEventArgs e)
         {
+            newOrderId = GenerateNewOrderId();
+
             serialNumber = 0;
             currentPizzaPrice = 0;
             currentToppingPrice = 0;
@@ -211,9 +213,43 @@ namespace PapaDarioPizzaApp.Pages
             TextBlock_BasePrice.Text = "Base Price : ";
             TextBlock_PizzaPrice.Text = "Pizza Price : ";
             TextBlock_ToppingPrice.Text = "Topping Price : ";
+        }
 
+        private int GenerateNewOrderId()
+        {
+            
+            string connectionString = DBConnnection.GetConnectionString();
+            SqlConnection conn = new SqlConnection(connectionString);
+            string query = "Select OrderId from PizzaOrders Order by Orderid Asc; ";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                int lastOrderId = 0;
+                while (reader.Read())
+                {
+                    lastOrderId = Convert.ToInt32(reader["OrderId"]);                   
+                }
+                newOrderId = lastOrderId + 1;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message.ToString();
+                string caption = "Data Error";
+                //messageDialog = new MessageDialog(message, caption);
+                //await messageDialog.ShowAsync();
+                Console.WriteLine(message);
 
+            }
+            finally
+            {
+                cmd.Dispose();
+                conn.Close();
+                
+            }
 
+            return newOrderId;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -349,7 +385,7 @@ namespace PapaDarioPizzaApp.Pages
 
             PizzaOrder temp = new PizzaOrder();
             temp.OrderDate = orderDate;
-            temp.OrderNumber = 1;
+            temp.OrderNumber = newOrderId;
             //temp.OrderDate = Convert.ToDateTime(PizzaOrderDate.Date);
             serialNumber += 1;
             temp.SerialNumber = serialNumber ;
@@ -913,6 +949,8 @@ namespace PapaDarioPizzaApp.Pages
 
         private void btnSubmitOrder_Click(object sender, RoutedEventArgs e)
         {
+            //Resets to newOrderId variable
+            newOrderId = -1;
 
             receiptReadyToPrint = true;
             btnPrintBill.IsEnabled = true;
