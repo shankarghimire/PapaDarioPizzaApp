@@ -171,6 +171,7 @@ namespace PapaDarioPizzaApp.Pages
         {
             newOrderId = GenerateNewOrderId();
 
+            pizzaOrderList.Clear();
             serialNumber = 0;
             currentPizzaPrice = 0;
             currentToppingPrice = 0;
@@ -236,7 +237,7 @@ namespace PapaDarioPizzaApp.Pages
             catch (Exception ex)
             {
                 string message = ex.Message.ToString();
-                string caption = "Data Error";
+                //string caption = "Data Error";
                 //messageDialog = new MessageDialog(message, caption);
                 //await messageDialog.ShowAsync();
                 Console.WriteLine(message);
@@ -255,17 +256,11 @@ namespace PapaDarioPizzaApp.Pages
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
-            
-
-
             //Resents the Buttons
             btnUpdate.IsEnabled = true;
             btnDelete.IsEnabled = true;
             btnSubmitOrder.IsEnabled = true;
             btnNewOrder.IsEnabled = false;
-
-           
-
 
             CheckDataValidation();
 
@@ -386,16 +381,22 @@ namespace PapaDarioPizzaApp.Pages
             PizzaOrder temp = new PizzaOrder();
             temp.OrderDate = orderDate;
             temp.OrderNumber = newOrderId;
+
+            //Default CustomerId and Name
+            //will be changged later as log in 
+            temp.CustomerId = 1;
+            temp.CustomerName = "Guest";
+
             //temp.OrderDate = Convert.ToDateTime(PizzaOrderDate.Date);
             serialNumber += 1;
             temp.SerialNumber = serialNumber ;
             if(chkDelivery.IsChecked == true)
             {
-                temp.IsDelivery = true;
+                temp.IsDelivery = "Yes";
             }
             else
             {
-                temp.IsDelivery = false;
+                temp.IsDelivery = "No";
             }
             //temp.CustomerId = Convert.ToInt32( tbCustomerId.Text);
             temp.PhoneNumber = tbPhoneNumber.Text;
@@ -949,6 +950,9 @@ namespace PapaDarioPizzaApp.Pages
 
         private void btnSubmitOrder_Click(object sender, RoutedEventArgs e)
         {
+            InsertOrderAndOrderDetails();
+
+
             //Resets to newOrderId variable
             newOrderId = -1;
 
@@ -960,8 +964,109 @@ namespace PapaDarioPizzaApp.Pages
             btnUpdate.IsEnabled = false;
             btnDelete.IsEnabled = false;
         }
+        private async void InsertOrderAndOrderDetails()
+        {
+            string connectionString = DBConnnection.GetConnectionString();
+            string insertQueryToOrders = "INSERT INTO PizzaOrders(OrderId, OrderedDate,CustomerId, IsDelivery, PhoneNumber, DeliveryAddress,TotalPrice,Discount,GrandTotal)" +
+                                        "VALUES(@OrderId, @OrderedDate, @CustomerId, @IsDelivery, @PhoneNumber, @DeliveryAddress, @TotalPrice, @Discount, @GrandTotal); ";
+            //string insertQueryToOrderDetails = "INSERT INTO PizzaOrderDetails(OrderId, PizzaSize,ToppingsDetails)" +
+                                            //"VALUES(@OrderId, @PizzaSize, @ToppingsDetails);";
+            SqlConnection conn = new SqlConnection(connectionString);
+            SqlCommand cmdForOrder = new SqlCommand(insertQueryToOrders, conn);
+            //SqlCommand cmdForOrderDetails = new SqlCommand(insertQueryToOrderDetails, conn);
+            SqlCommand cmdForOrderDetails = conn.CreateCommand();
+            try
+            {
+                //Object to hold Order Info
+                //Extract Order Info
+                PizzaOrder tempPizzaOrder = new PizzaOrder();
+                if(pizzaOrderList != null)
+                {
+                    tempPizzaOrder = (PizzaOrder)pizzaOrderList[0];
+                }
 
-        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+                //Transfer data to Order Object
+                Order tempOrder = new Order();
+                tempOrder.OrderId = tempPizzaOrder.OrderNumber;
+                tempOrder.OrderDate = tempPizzaOrder.OrderDate;
+                tempOrder.CustomerId = tempPizzaOrder.CustomerId;
+                tempOrder.PhoneNumber = tempPizzaOrder.PhoneNumber;
+                tempOrder.IsDelivery = tempPizzaOrder.IsDelivery;
+                tempOrder.DeliveryAddress = tempPizzaOrder.DeliveryAddress;
+                tempOrder.TotalPrice = totalAmount;
+                tempOrder.Discount = discountAmount;
+                tempOrder.GrandTotal = grandTotalAmount;
+                //Prepares the SqlCommand cmdForOrder
+                cmdForOrder.Parameters.AddWithValue("OrderId", tempOrder.OrderId);
+                cmdForOrder.Parameters.AddWithValue("OrderedDate", tempOrder.OrderDate);
+                cmdForOrder.Parameters.AddWithValue("CustomerId", tempOrder.CustomerId);
+                cmdForOrder.Parameters.AddWithValue("PhoneNumber", tempOrder.PhoneNumber);
+                cmdForOrder.Parameters.AddWithValue("IsDelivery", tempOrder.IsDelivery);
+                if(tempOrder.DeliveryAddress == null)
+                {
+                    tempOrder.DeliveryAddress = " ";
+                }
+                cmdForOrder.Parameters.AddWithValue("DeliveryAddress", tempOrder.DeliveryAddress);
+                cmdForOrder.Parameters.AddWithValue("TotalPrice", tempOrder.TotalPrice);
+                cmdForOrder.Parameters.AddWithValue("Discount", tempOrder.Discount);
+                cmdForOrder.Parameters.AddWithValue("GrandTotal", tempOrder.GrandTotal);
+
+                
+                //Transfer ddata to OrderDetails object
+                
+                List<OrderDetails> orderDetailsList = new List<OrderDetails>();
+                orderDetailsList.Clear();
+                foreach (PizzaOrder temp in pizzaOrderList)
+                {
+                    OrderDetails tempOrderDetails = new OrderDetails();
+                    tempOrderDetails.SN = temp.SerialNumber;
+                    tempOrderDetails.OrderId = temp.OrderNumber;
+                    tempOrderDetails.PizzaSize = temp.Size;
+                    tempOrderDetails.Toppings = temp.Toppings;
+                    orderDetailsList.Add(tempOrderDetails);
+                }
+
+                //Opens the connection
+                conn.Open();
+
+                //Executes the SqlCmd
+                cmdForOrder.ExecuteNonQuery();
+
+                //Prepares cmd with parameter for OrderDetails
+                foreach(OrderDetails data in orderDetailsList)
+                {
+                    string insertQueryToOrderDetails = "INSERT INTO PizzaOrderDetails(OrderId, PizzaSize,ToppingsDetails)" +
+                    "VALUES(" + data.OrderId +",'"+ data.PizzaSize +"','" + data.Toppings +"');";
+                    cmdForOrderDetails.CommandText = insertQueryToOrderDetails;
+                    //cmdForOrderDetails.Parameters.AddWithValue("OrderId", data.OrderId);
+                   // cmdForOrderDetails.Parameters.AddWithValue("PizzaSize", data.PizzaSize);
+                    //cmdForOrderDetails.Parameters.AddWithValue("ToppingsDetails", data.Toppings);
+                    
+                    cmdForOrderDetails.ExecuteNonQuery();
+
+                }
+
+                string message = "Thank you for your Order! :):):)";
+                string caption = "Order Success";
+                messageDialog = new MessageDialog(message, caption);
+                await messageDialog.ShowAsync();
+
+
+        }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+            finally
+            {
+                cmdForOrder.Dispose();
+                cmdForOrderDetails.Dispose();
+                conn.Close();
+        }
+
+    }
+
+        private  void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = -1;
              index = dataGridViewOrder.SelectedIndex;
@@ -1006,11 +1111,11 @@ namespace PapaDarioPizzaApp.Pages
             orderUpdate.CustomerName = tbCustomerName.Text;
             if(chkDelivery.IsChecked == true)
             {
-                orderUpdate.IsDelivery = true;
+                orderUpdate.IsDelivery = "Yes";
             }
             else
             {
-                orderUpdate.IsDelivery = false;
+                orderUpdate.IsDelivery = "No";
             }
 
             orderUpdate.PhoneNumber = tbPhoneNumber.Text;
@@ -1108,7 +1213,7 @@ namespace PapaDarioPizzaApp.Pages
             TextBlock_GrandTotalAmount.Text = "Grand Total = " + grandTotalAmount.ToString("0.00");
         }
 
-        private async  void dataGridViewOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private   void dataGridViewOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(dataGridViewOrder != null)
             {
@@ -1137,7 +1242,7 @@ namespace PapaDarioPizzaApp.Pages
                         tbCustomerName.Text = current.CustomerName;
                     }
                             
-                    if (current.IsDelivery == true)
+                    if (current.IsDelivery == "Yes")
                     {
                         chkDelivery.IsChecked = true;
                     }

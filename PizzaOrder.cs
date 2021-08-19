@@ -13,7 +13,7 @@ namespace PapaDarioPizzaApp
         public DateTime OrderDate { get; set; }
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public bool IsDelivery { get; set; }
+        public string IsDelivery { get; set; }
         public string PhoneNumber { get; set; }
         public string DeliveryAddress { get; set; }
         public string Size { get; set; }
@@ -21,6 +21,7 @@ namespace PapaDarioPizzaApp
         //public string[] ToppingsTest { get; set; }
         //public Dictionary<string, double> selectedToppings { get; set; }
         public double Price { get; set; }
+
         public PizzaOrder()
         {
             //selectedToppings = new Dictionary<string, double>();
