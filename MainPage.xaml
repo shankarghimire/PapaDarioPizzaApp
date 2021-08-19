@@ -73,7 +73,7 @@
                         Background="DarkGreen" 
                         Foreground="White" 
                         Padding="10 5 10 5"
-                        CornerRadius="5"/>
+                        CornerRadius="5" Click="btnCancel1_Click"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 10 0 0 ">
                     <TextBlock 
@@ -146,7 +146,7 @@
                         Background="DarkGreen" 
                         Foreground="White" 
                         Padding="10 5 10 5"
-                        CornerRadius="5"/>
+                        CornerRadius="5" Click="btnCancel2_Click"/>
                 </StackPanel>
                 <StackPanel Grid.Row="9"  Orientation="Horizontal">
                     <TextBlock x:Name="TextBloxk_loginFailureMessage"

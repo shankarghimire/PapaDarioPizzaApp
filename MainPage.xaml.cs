@@ -157,6 +157,16 @@ namespace PapaDarioPizzaApp
             
         }
 
+        private void btnCancel2_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
+
+        private void btnCancel1_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
+
         //private void btnCheck_Click(object sender, RoutedEventArgs e)
         //{
         //    string cs = DBConnnection.GetConnectionString();
