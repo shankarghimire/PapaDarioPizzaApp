@@ -18,11 +18,14 @@ namespace PapaDarioPizzaApp
         public string DeliveryAddress { get; set; }
         public string Size { get; set; }
         public string Toppings { get; set; }
+        //public string[] ToppingsTest { get; set; }
         //public Dictionary<string, double> selectedToppings { get; set; }
         public double Price { get; set; }
         public PizzaOrder()
         {
             //selectedToppings = new Dictionary<string, double>();
+            //ToppingsTest = new string[12];
+
         }
 
     }

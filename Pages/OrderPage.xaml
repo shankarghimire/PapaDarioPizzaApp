@@ -326,7 +326,7 @@
                     Foreground="White"
                     FontWeight="Bold"
                     CornerRadius="5"
-                    Margin="10,0,10,0"/>
+                    Margin="10,0,10,0" Click="btnSubmitOrder_Click"/>
             <Button x:Name="btnPrintBill"
                     Content="Print Receipt"
                     Background="blue"
@@ -342,6 +342,21 @@
                     CornerRadius="5"
                     Width="110"
                     Margin="10,0,10,0" Click="btnNewOrder_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="10"
+                    Grid.Column="2"
+                    Grid.RowSpan="3"
+                    >
+            <TextBlock x:Name="TextBlock_TotalAmount"
+                       Text="Total :"
+                       FontSize="15"/>
+            <TextBlock x:Name="TextBlock_DiscountAmount"
+                       Text="Discount:"
+                       FontSize="15"/>
+            <TextBlock x:Name="TextBlock_GrandTotalAmount"
+                       Text="Grand Total:"
+                       FontSize="15"/>
+
         </StackPanel>
     </Grid>
 </Page>
