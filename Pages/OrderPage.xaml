@@ -24,6 +24,7 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -113,7 +114,7 @@
             <TextBox x:Name="tbDeliveryAddress"
                      Width="300"/>
         </StackPanel>
-        <StackPanel Grid.Row="7"
+        <StackPanel Grid.Row="8"
                     Grid.Column="0"
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
@@ -147,6 +148,7 @@
                     FontWeight="bold"
                     CornerRadius="5" Click="btnReset_Click"/>
         </StackPanel>
+        
         <Border BorderThickness="2"
                 Grid.Row="1"
                 Grid.Column="1"
@@ -159,31 +161,31 @@
 
             <StackPanel Grid.Row="1"
                     Grid.Column="1"
-                    Grid.RowSpan="4"  
+                    Grid.RowSpan="3"  
                     HorizontalAlignment="Left"
                     Height="200"
                     >
                 <TextBlock Text="Please, select one Pizza Size:" FontWeight="Bold"/>
                 <RadioButton x:Name="rbSmall"  
                              Content="Small"
-                             GroupName="pizzaSize"
+                             GroupName="pizzaSize" Click="rbSmall_Click"
                          />
                 <RadioButton x:Name="rbMedium"  
                              Content="Medium"
-                             GroupName="pizzaSize"/>
+                             GroupName="pizzaSize" Click="rbMedium_Click"/>
                 <RadioButton x:Name="rbLarge"  
                              Content="Large"
-                             GroupName="pizzaSize"/>
+                             GroupName="pizzaSize" Click="rbLarge_Click"/>
 
             </StackPanel>
         </Border>
         <Border Grid.Row="1"
-                Grid.Column="2"
-                Grid.RowSpan="6"
+                Grid.Column="1"
+                Grid.RowSpan="7"
                 BorderThickness="2"
                 BorderBrush="Gold"             
                 HorizontalAlignment="Left"
-                Padding="10 ,0, 10,0">
+                Padding="10 ,0, 10,0" Grid.ColumnSpan="2" Margin="300,1,0,35" Width="437">
             <StackPanel>
                 <TextBlock Text="Plese, select the favourite Toppings:" FontWeight="Bold"/>
                 <Grid>
@@ -196,69 +198,69 @@
                         <RowDefinition Height="25"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
                     <CheckBox Grid.Row="0"
                               Grid.Column="0"
                               x:Name="chkPepperoni"
-                              Content="Pepperoni"
+                              Content="Pepperoni" Click="chkPepperoni_Click"
                               />
 
                     <CheckBox Grid.Row="1"
                               Grid.Column="0"
                               x:Name="chkMushrooms"
-                              Content="Mushrooms"
+                              Content="Mushrooms" Click="chkMushrooms_Click"
                               />
 
                     <CheckBox Grid.Row="2"
                               Grid.Column="0"
                               x:Name="chkOnion"
-                              Content="Onions"
+                              Content="Onions" Click="chkOnion_Click"
                               />
                     <CheckBox Grid.Row="3"
                               Grid.Column="0"
                               x:Name="chkSausage"
-                              Content="Sausage"
+                              Content="Sausage" Click="chkSausage_Click"
                               />
                     <CheckBox Grid.Row="4"
                               Grid.Column="0"
                               x:Name="chkBacon"
-                              Content="Bacon"
+                              Content="Bacon" Click="chkBacon_Click"
                               />
                     <CheckBox Grid.Row="5"
                               Grid.Column="0"
                               x:Name="chkExtraCheese"
-                              Content="Extra Cheese"
+                              Content="Extra Cheese" Click="chkExtraCheese_Click"
                               />
                     <CheckBox Grid.Row="0"
-                              Grid.Column="1"
+                              Grid.Column="2"
                               x:Name="chkBlackOlives"
-                              Content="Black Olives"
+                              Content="Black Olives" Click="chkBlackOlives_Click"
                               />
 
                     <CheckBox Grid.Row="1"
-                              Grid.Column="1"
+                              Grid.Column="2"
                               x:Name="chkGreenPeppers"
-                              Content="Green Peppers"
+                              Content="Green Peppers" Click="chkGreenPeppers_Click"
                               />
 
                     <CheckBox Grid.Row="2"
-                              Grid.Column="1"
+                              Grid.Column="2"
                               x:Name="chkPineapple"
-                              Content="Pineapple"
+                              Content="Pineapple" Click="chkPineapple_Click"
                               />
                     <CheckBox Grid.Row="3"
-                              Grid.Column="1"
+                              Grid.Column="2"
                               x:Name="chkSpiniach"
-                              Content="Spiniach"
+                              Content="Spiniach" Click="chkSpiniach_Click"
                               />
                     <CheckBox Grid.Row="4"
-                              Grid.Column="1"
+                              Grid.Column="2"
                               x:Name="chkBroccoli"
-                              Content="Broccoli"
+                              Content="Broccoli" Click="chkBroccoli_Click"
                               />
 
 
@@ -266,7 +268,37 @@
 
             </StackPanel>
         </Border>
+        <StackPanel Grid.Row="7"
+                    Grid.Column="1"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="TextBlock_BasePrice"
+                       Text="Base Price:"
+                       FontSize="16"
+                      Foreground="Green"
+                       FontWeight="Bold"
+                       Margin="5,0,0,0"/>
+        </StackPanel>
         <StackPanel Grid.Row="8"
+                    Grid.Column="1"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="TextBlock_PizzaPrice"
+                       Text="Pizza Price:"
+                       FontSize="16"
+                      Foreground="Green"
+                       FontWeight="Bold"
+                       Margin="5,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="7"
+                    Grid.Column="2"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="TextBlock_ToppingPrice"
+                       Text="Topping Price:"
+                       FontSize="16"
+                      Foreground="Green"
+                       FontWeight="Bold"
+                       Margin="5,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="9"
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
                    
@@ -285,7 +317,7 @@
                 Height="398"                            
                 />
         </StackPanel>
-        <StackPanel Grid.Row="9"
+        <StackPanel Grid.Row="10"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button x:Name="btnSubmitOrder"

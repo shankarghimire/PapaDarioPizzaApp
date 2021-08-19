@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using System.Data.SqlClient;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,6 +32,14 @@ namespace PapaDarioPizzaApp.Pages
         private int serialNumber;
         private Dictionary<string, double> sizeDictionary;
         private Dictionary<string, double> toppingDictionary;
+        private List<Pizza> pizzaList = new List<Pizza>();
+        private List<Topping> toppingList = new List<Topping>();
+
+        private double currentPrice = 0;
+        private double currentPizzaRate = 0;
+        private double currentPizzaPrice = 0;
+        private double currentToppingPrice = 0;
+        private double currentPizzaBasePrice = 0.0;
         public OrderPage()
         {
             this.InitializeComponent();
@@ -51,6 +62,8 @@ namespace PapaDarioPizzaApp.Pages
 
                            
             DisableUIElements();
+            LoadPizzaRate();
+            LoadToppingRate();
         }
 
         private void chkDelivery_Checked(object sender, RoutedEventArgs e)
@@ -226,6 +239,14 @@ namespace PapaDarioPizzaApp.Pages
             //temp.OrderDate = Convert.ToDateTime(PizzaOrderDate.Date);
             serialNumber += 1;
             temp.SerialNumber = serialNumber ;
+            if(chkDelivery.IsChecked == true)
+            {
+                temp.IsDelivery = true;
+            }
+            else
+            {
+                temp.IsDelivery = false;
+            }
             //temp.CustomerId = Convert.ToInt32( tbCustomerId.Text);
             temp.PhoneNumber = tbPhoneNumber.Text;
 
@@ -296,6 +317,513 @@ namespace PapaDarioPizzaApp.Pages
             pizzaOrderList.Add(temp);
             dataGridViewOrder.ItemsSource = pizzaOrderList;
 
+        }
+        private void LoadPizzaRate()
+        {
+            string connectionString = DBConnnection.GetConnectionString();
+            SqlConnection conn = new SqlConnection(connectionString);
+            string query = "SELECT * FROM PizzaSize;";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                pizzaList.Clear();
+                while (reader.Read())
+                {
+                    int id = Convert.ToInt32(reader["Id"]);
+                    string pizzaSize = reader["PizzaSize"].ToString();
+                    string description = reader["PizzaDescription"].ToString();
+                    double price = Convert.ToDouble(reader["Price"]);
+                    Pizza tempPizza = new Pizza(id, pizzaSize, description, price);
+                    pizzaList.Add(tempPizza);
+
+                }
+
+                double smallRate = 0;
+                double mediumRate = 0;
+                double largeRate = 0;
+                foreach(Pizza temp in pizzaList)
+                {
+                    if(temp.ID == 1)
+                    {
+                        smallRate = temp.Price;
+                    }
+                    else if(temp.ID == 2)
+                    {
+                        mediumRate = temp.Price;
+                    }
+                    else if(temp.ID == 3)
+                    {
+                        largeRate = temp.Price;
+                    }
+                }
+
+                rbSmall.Content += " @ " + smallRate;
+                rbMedium.Content += " @ " + mediumRate;
+                rbLarge.Content += " @ " + largeRate;
+                     
+                
+
+                //tbPizzaSizeId.Text = PizzaList[0].ID.ToString();
+                //tbPizzaSize.Text = PizzaList[0].PizzaSize.ToString();
+                //tbPizzaDescription.Text = PizzaList[0].Description.ToString();
+                //tbPizzaPrice.Text = PizzaList[0].Price.ToString();
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message.ToString();
+                string caption = "Data Error";
+                messageDialog = new MessageDialog(message, caption);
+                Console.WriteLine(message);
+
+            }
+            finally
+            {
+                cmd.Dispose();
+                conn.Close();
+            }
+        }
+        private void LoadToppingRate()
+        {
+            string connectionString = DBConnnection.GetConnectionString();
+            SqlConnection conn = new SqlConnection(connectionString);
+            string query = "SELECT * FROM Toppings;";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                toppingList.Clear();
+                while (reader.Read())
+                {
+                    int id = Convert.ToInt32(reader["Id"]);
+                    
+                    string toppingName = reader["ToppingName"].ToString();
+                    string description = "";
+
+                    if (!reader.IsDBNull(2))
+                    {
+                        description = reader["Description"].ToString();
+                    }
+
+                  
+                    double price = Convert.ToDouble(reader["Price"]);
+                    Topping temp = new Topping(id, toppingName, description, price);
+                    toppingList.Add(temp);
+                    
+                }
+
+                //double smallRate = 0;
+                //double mediumRate = 0;
+                //double largeRate = 0;
+                foreach (Topping temp in toppingList)
+                {
+                    if (temp.ID == 1)
+                    {
+                        chkPepperoni.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 2)
+                    {
+                        chkMushrooms.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 3)
+                    {
+                        chkOnion.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 4)
+                    {
+                        chkSausage.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 5)
+                    {
+                        chkBacon.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 6)
+                    {
+                        chkExtraCheese.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 7)
+                    {
+                        chkBlackOlives.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 8)
+                    {
+                        chkGreenPeppers.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 9)
+                    {
+                        chkPineapple.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 10)
+                    {
+                        chkSpiniach.Content += " @ " + temp.ToppingPrice;
+                    }
+                    else if (temp.ID == 11)
+                    {
+                        chkBroccoli.Content += " @ " + temp.ToppingPrice;
+                    }
+
+
+                }
+
+                //rbSmall.Content += " @ " + smallRate;
+                //rbMedium.Content += " @ " + mediumRate;
+                //rbLarge.Content += " @ " + largeRate;
+
+
+
+                //tbPizzaSizeId.Text = PizzaList[0].ID.ToString();
+                //tbPizzaSize.Text = PizzaList[0].PizzaSize.ToString();
+                //tbPizzaDescription.Text = PizzaList[0].Description.ToString();
+                //tbPizzaPrice.Text = PizzaList[0].Price.ToString();
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message.ToString();
+                string caption = "Data Error";
+                messageDialog = new MessageDialog(message, caption);
+                Console.WriteLine(message);
+
+            }
+            finally
+            {
+                cmd.Dispose();
+                conn.Close();
+            }
+        }
+
+        private double FindToppingRate(int i)
+        {
+            double rate = 0;
+            foreach(Topping temp in toppingList)
+            {
+                if(temp.ID == i)
+                {
+                    rate = temp.ToppingPrice;
+                    break;
+                }
+            }
+            return rate;
+        }
+        private double FindPizzaRate(int i)
+        {
+            double rate = 0;
+            foreach (Pizza temp in pizzaList)
+            {
+                if (temp.ID == i)
+                {
+                    rate = temp.Price;
+                    break;
+                }
+            }
+            return rate;
+        }
+
+        private void rbSmall_Click(object sender, RoutedEventArgs e)
+        {
+            double rate = FindPizzaRate(1);
+            currentPizzaBasePrice = rate;
+            TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+
+           
+
+        }
+        private void UpdatePrice()
+        {
+
+            TextBlock_PizzaPrice.Text = "Price : " + currentPrice;
+        }
+
+        private void rbMedium_Click(object sender, RoutedEventArgs e)
+        {
+            double rate = FindPizzaRate(2);
+            currentPizzaBasePrice = rate;
+            TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void rbLarge_Click(object sender, RoutedEventArgs e)
+        {
+            double rate = FindPizzaRate(3);
+            currentPizzaBasePrice = rate;
+            TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkPepperoni_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(1);
+            if(chkPepperoni.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else 
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+
+            if (currentToppingPrice == 0.0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+        private void FindTotalToppingPrice()
+        {
+
+        }
+
+        private void chkMushrooms_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(2);
+            if (chkMushrooms.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkOnion_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(3);
+            if (chkOnion.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkSausage_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(4);
+            if (chkSausage.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkBacon_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(5);
+            if (chkBacon.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkExtraCheese_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(6);
+            if (chkExtraCheese.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkBlackOlives_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(7);
+            if (chkBlackOlives.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkGreenPeppers_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(8);
+            if (chkGreenPeppers.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkPineapple_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(9);
+            if (chkPineapple.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkSpiniach_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(10);
+            if (chkSpiniach.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+        }
+
+        private void chkBroccoli_Click(object sender, RoutedEventArgs e)
+        {
+            double toppingRate = FindToppingRate(11);
+            if (chkBroccoli.IsChecked == true)
+            {
+                currentToppingPrice = currentToppingPrice + toppingRate;
+            }
+            else
+            {
+                currentToppingPrice = currentToppingPrice - toppingRate;
+            }
+            currentToppingPrice = Math.Round(currentToppingPrice, 2);
+            if (currentToppingPrice == 0)
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+            else
+            {
+                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+            }
+
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
         }
     }
 }
