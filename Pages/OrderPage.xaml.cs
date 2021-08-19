@@ -49,6 +49,9 @@ namespace PapaDarioPizzaApp.Pages
         private double grandTotalAmount = 0.0;
 
         private bool receiptReadyToPrint = false;
+
+        //Log in user info
+        private UserInfo userInfo = new UserInfo();
         public OrderPage()
         {
             this.InitializeComponent();
@@ -171,6 +174,8 @@ namespace PapaDarioPizzaApp.Pages
         {
             newOrderId = GenerateNewOrderId();
 
+            
+
             pizzaOrderList.Clear();
             serialNumber = 0;
             currentPizzaPrice = 0;
@@ -207,6 +212,8 @@ namespace PapaDarioPizzaApp.Pages
             chkOnion.IsChecked = false;
 
             //Reset All TextBlock
+         
+
             TextBlock_TotalAmount.Text = "Total = " + totalAmount.ToString("0.00");
             TextBlock_DiscountAmount.Text = "Discount = " + discountAmount.ToString("0.00");
             TextBlock_GrandTotalAmount.Text = "Grand Total = " + grandTotalAmount.ToString("0.00");
@@ -214,6 +221,18 @@ namespace PapaDarioPizzaApp.Pages
             TextBlock_BasePrice.Text = "Base Price : ";
             TextBlock_PizzaPrice.Text = "Pizza Price : ";
             TextBlock_ToppingPrice.Text = "Topping Price : ";
+
+            //User Info 
+            User currentUser = (User)userInfo.GetLoggedInUser();
+
+            //Resets all TextBox           
+            tbCustomerId.Text = currentUser.UserId.ToString();
+            tbCustomerName.Text = currentUser.UserName;           
+            chkDelivery.IsChecked = false;
+            tbPhoneNumber.Text = "";
+            tbDeliveryAddress.Text = "";
+                 
+
         }
 
         private int GenerateNewOrderId()
@@ -977,9 +996,9 @@ namespace PapaDarioPizzaApp.Pages
             SqlCommand cmdForOrderDetails = conn.CreateCommand();
             try
             {
-                //Object to hold Order Info
-                //Extract Order Info
-                PizzaOrder tempPizzaOrder = new PizzaOrder();
+            //Object to hold Order Info
+            //Extract Order Info
+            PizzaOrder tempPizzaOrder = new PizzaOrder();
                 if(pizzaOrderList != null)
                 {
                     tempPizzaOrder = (PizzaOrder)pizzaOrderList[0];
@@ -1038,8 +1057,9 @@ namespace PapaDarioPizzaApp.Pages
                     string insertQueryToOrderDetails = "INSERT INTO PizzaOrderDetails(OrderId, PizzaSize,ToppingsDetails)" +
                     "VALUES(" + data.OrderId +",'"+ data.PizzaSize +"','" + data.Toppings +"');";
                     cmdForOrderDetails.CommandText = insertQueryToOrderDetails;
+                    
                     //cmdForOrderDetails.Parameters.AddWithValue("OrderId", data.OrderId);
-                   // cmdForOrderDetails.Parameters.AddWithValue("PizzaSize", data.PizzaSize);
+                    // cmdForOrderDetails.Parameters.AddWithValue("PizzaSize", data.PizzaSize);
                     //cmdForOrderDetails.Parameters.AddWithValue("ToppingsDetails", data.Toppings);
                     
                     cmdForOrderDetails.ExecuteNonQuery();
@@ -1107,7 +1127,7 @@ namespace PapaDarioPizzaApp.Pages
         {
             var orderUpdate = pizzaOrderList.Single(tempOrder => tempOrder.SerialNumber == updateId);
 
-            orderUpdate.CustomerId = Convert.ToInt32( tbCustomerId.Text);
+            orderUpdate.CustomerId = Convert.ToInt32(tbCustomerId.Text);
             orderUpdate.CustomerName = tbCustomerName.Text;
             if(chkDelivery.IsChecked == true)
             {
