@@ -913,6 +913,7 @@ namespace PapaDarioPizzaApp.Pages
 
         private void btnSubmitOrder_Click(object sender, RoutedEventArgs e)
         {
+
             receiptReadyToPrint = true;
             btnPrintBill.IsEnabled = true;
             btnSubmitOrder.IsEnabled = false;
@@ -1073,7 +1074,7 @@ namespace PapaDarioPizzaApp.Pages
         {
             if(dataGridViewOrder != null)
             {
-                int index = -1;
+                //int index = -1;
                 PizzaOrder current = new PizzaOrder();
                 current = (PizzaOrder)dataGridViewOrder.SelectedItem;
                 if(current != null)

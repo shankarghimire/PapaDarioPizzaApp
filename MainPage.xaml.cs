@@ -26,10 +26,14 @@ namespace PapaDarioPizzaApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        string connectionString = "";
+        private User user;
         
         public MainPage()
         {
             this.InitializeComponent();
+            user = new User();
+            //loggedInUser = new User();
         }
 
         private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
@@ -78,10 +82,11 @@ namespace PapaDarioPizzaApp
 
         private void btnLoginAdmin_Click(object sender, RoutedEventArgs e)
         {
-            string userName = "Admin";
-            string storedPassword = "12345";
+            string userName = tbUserName.Text;
+            //string storedPassword = "12345";
             string inputPassword = pswPassword.Password.ToString();
-            if(tbUserName.Text == userName && inputPassword  == storedPassword)
+            bool result = CheckLogInCredential( userName,  inputPassword);
+            if (result == true)
             {
                 Frame.Navigate(typeof(AdminPage));
             }
@@ -90,13 +95,65 @@ namespace PapaDarioPizzaApp
                 TextBloxk_loginFailureMessage.Text = "Inalid User Name or Password!";
                 //pswPassword.ClearValue();
             }
+
             
+
+        }
+
+        private bool CheckLogInCredential(string userName, string userPassword)
+        {
+            bool result = false;
+            connectionString = DBConnnection.GetConnectionString();
+            SqlConnection conn = new SqlConnection(connectionString);
+            string query = "SELECT * FROM Users where UserName = '" + userName + "' and UserPassword='" + userPassword +"';";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                //PizzaList.Clear();
+                while (reader.Read())
+                {
+                    //int id = Convert.ToInt32(reader["Id"]);
+                    string userNameFromDB = reader["UserName"].ToString();
+                    string userPasswordFromDB = reader["UserPassword"].ToString();
+                    if(userName == userNameFromDB && userPassword == userPasswordFromDB)
+                    {
+                        result = true;
+                        break;
+                    }
+
+                }
+
+                //dataGridViewPizzaSize.ItemsSource = PizzaList;
+
+                //tbPizzaSizeId.Text = PizzaList[0].ID.ToString();
+                //tbPizzaSize.Text = PizzaList[0].PizzaSize.ToString();
+                //tbPizzaDescription.Text = PizzaList[0].Description.ToString();
+                //tbPizzaPrice.Text = PizzaList[0].Price.ToString();
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message.ToString();
+                //string caption = "Data Error";
+                //messageDialog = new MessageDialog(message, caption);
+                Console.WriteLine(message);
+
+            }
+            finally
+            {
+                cmd.Dispose();
+                conn.Close();
+                
+            }
+
+            return result;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            tbUserName.Text = "Admin";
-            pswPassword.Password = "12345";
+            //tbUserName.Text = "Admin";
+            //pswPassword.Password = "12345";
             
         }
 

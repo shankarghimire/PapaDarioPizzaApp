@@ -151,6 +151,8 @@
     <Compile Include="ToppingsPage.xaml.cs">
       <DependentUpon>ToppingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
+    <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
