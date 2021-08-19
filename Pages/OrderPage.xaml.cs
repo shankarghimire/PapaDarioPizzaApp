@@ -35,6 +35,8 @@ namespace PapaDarioPizzaApp.Pages
         private List<Pizza> pizzaList = new List<Pizza>();
         private List<Topping> toppingList = new List<Topping>();
 
+        private int updateId = -1;
+
         private double currentPrice = 0;
         //private double currentPizzaRate = 0;
         private double currentPizzaPrice = 0;
@@ -216,12 +218,47 @@ namespace PapaDarioPizzaApp.Pages
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+
+            //Resetns the variables
+            currentPizzaPrice = 0;
+            currentToppingPrice = 0;
+            currentPizzaBasePrice = 0.0;
+
+
+            //Resents the Buttons
             btnUpdate.IsEnabled = true;
             btnDelete.IsEnabled = true;
             btnSubmitOrder.IsEnabled = true;
             btnNewOrder.IsEnabled = false;
 
+           
+
+
             CheckDataValidation();
+
+            //reset radio buttons
+            rbSmall.IsChecked = false;
+            rbMedium.IsChecked = false;
+            rbLarge.IsChecked = false;
+
+            //Resets all check boxes
+            chkPepperoni.IsChecked = false;
+            chkMushrooms.IsChecked = false;
+            chkOnion.IsChecked = false;
+            chkSausage.IsChecked = false;
+            chkBacon.IsChecked = false;
+            chkExtraCheese.IsChecked = false;
+            chkBlackOlives.IsChecked = false;
+            chkGreenPeppers.IsChecked = false;
+            chkPineapple.IsChecked = false;
+            chkSpiniach.IsChecked = false;
+            chkBroccoli.IsChecked = false;
+
+            //Resets the TextBlock
+            TextBlock_BasePrice.Text = "Base Price: ";
+            TextBlock_ToppingPrice.Text = "Topping Price : ";
+            TextBlock_PizzaPrice.Text = "Pizza Price : ";
+
         }
         private async void CheckDataValidation()
         {
@@ -376,7 +413,12 @@ namespace PapaDarioPizzaApp.Pages
                 //temp.selectedToppings.Add("Black Olives", 1.5);
                 temp.Toppings += " Black Olives";
             }
-             if (chkPineapple.IsChecked == true)
+            if (chkGreenPeppers.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Black Olives", 1.5);
+                temp.Toppings += " Green Peppers";
+            }
+            if (chkPineapple.IsChecked == true)
             {
                 //temp.selectedToppings.Add("Pineapple", 1.5);
                 temp.Toppings += " Pineapple";
@@ -955,6 +997,383 @@ namespace PapaDarioPizzaApp.Pages
             btnAdd.IsEnabled = false;
             btnUpdate.IsEnabled = false;
             btnDelete.IsEnabled = false;
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int index = -1;
+             index = dataGridViewOrder.SelectedIndex;
+            pizzaOrderList.RemoveAt(index);
+            int sn = 1;
+            foreach(PizzaOrder item in pizzaOrderList)
+            {
+                item.SerialNumber = sn;
+                sn++;
+            }
+            
+            dataGridViewOrder.ItemsSource = null;
+            dataGridViewOrder.ItemsSource = pizzaOrderList;
+
+
+            totalAmount = 0;
+            discountAmount = 0;
+            grandTotalAmount = 0;
+            foreach (PizzaOrder item in pizzaOrderList)
+            {
+                totalAmount += item.Price;
+            }
+            discountAmount = 0.0;
+            grandTotalAmount = totalAmount - discountAmount;
+            TextBlock_TotalAmount.Text = "Total = " + totalAmount.ToString("0.00");
+            TextBlock_DiscountAmount.Text = "Discount = " + discountAmount.ToString("0.00");
+            TextBlock_GrandTotalAmount.Text = "Grand Total = " + grandTotalAmount.ToString("0.00");
+
+            //messageDialog = new MessageDialog(index.ToString(), "select index");
+            //await messageDialog.ShowAsync();
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            var orderUpdate = pizzaOrderList.Single(tempOrder => tempOrder.SerialNumber == updateId);
+
+            orderUpdate.CustomerId = Convert.ToInt32( tbCustomerId.Text);
+            orderUpdate.CustomerName = tbCustomerName.Text;
+            if(chkDelivery.IsChecked == true)
+            {
+                orderUpdate.IsDelivery = true;
+            }
+            else
+            {
+                orderUpdate.IsDelivery = false;
+            }
+
+            orderUpdate.PhoneNumber = tbPhoneNumber.Text;
+            orderUpdate.DeliveryAddress = tbDeliveryAddress.Text;
+
+            if(rbSmall.IsChecked == true)
+            {
+                orderUpdate.Size = "Small";
+            }
+            else if(rbMedium.IsChecked == true)
+            {
+                orderUpdate.Size = "Medium";
+            }
+            else if(rbLarge.IsChecked == true)
+            {
+                orderUpdate.Size = "Large";
+            }
+
+            //update Toppings
+            orderUpdate.Toppings = "";
+            //Toppings
+            if (chkPepperoni.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Pepperoni", 1.5);
+                orderUpdate.Toppings = "Pepperoni";
+                //temp.ToppingsTest[toppingIndex++] = "Pepperoni";
+            }
+            if (chkMushrooms.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Mushrooms", 1.5);
+                orderUpdate.Toppings += " Mushrooms";
+                //temp.ToppingsTest[toppingIndex++] = "Mushrooms";
+            }
+            if (chkOnion.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Onion", 1.5);
+                orderUpdate.Toppings += " Onion";
+                //temp.ToppingsTest[toppingIndex++] = "Onion";
+            }
+            if (chkSausage.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Sausage", 1.5);
+                orderUpdate.Toppings += " Sausage";
+            }
+            if (chkBacon.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Bacon", 1.5);
+                orderUpdate.Toppings += " Bacon";
+            }
+            if (chkExtraCheese.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Extra Cheese", 1.5);
+                orderUpdate.Toppings += " Extra Cheese";
+            }
+            if (chkBlackOlives.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Black Olives", 1.5);
+                orderUpdate.Toppings += " Black Olives";
+            }
+            if (chkPineapple.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Pineapple", 1.5);
+                orderUpdate.Toppings += " Pineapple";
+            }
+            if (chkSpiniach.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Spiniach", 1.5);
+                orderUpdate.Toppings += " Spiniach";
+            }
+            if (chkBroccoli.IsChecked == true)
+            {
+                //temp.selectedToppings.Add("Broccoli", 1.5);
+                orderUpdate.Toppings += " Broccoli";
+            }
+
+            //clear Data Grid View
+            dataGridViewOrder.ItemsSource = null;
+            dataGridViewOrder.ItemsSource = pizzaOrderList;
+
+
+
+
+
+            totalAmount = 0;
+            discountAmount = 0;
+            grandTotalAmount = 0;
+            foreach (PizzaOrder item in pizzaOrderList)
+            {
+                totalAmount += item.Price;
+            }
+            discountAmount = 0.0;
+            grandTotalAmount = totalAmount - discountAmount;
+            TextBlock_TotalAmount.Text = "Total = " + totalAmount.ToString("0.00");
+            TextBlock_DiscountAmount.Text = "Discount = " + discountAmount.ToString("0.00");
+            TextBlock_GrandTotalAmount.Text = "Grand Total = " + grandTotalAmount.ToString("0.00");
+        }
+
+        private async  void dataGridViewOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(dataGridViewOrder != null)
+            {
+                int index = -1;
+                PizzaOrder current = new PizzaOrder();
+                current = (PizzaOrder)dataGridViewOrder.SelectedItem;
+                if(current != null)
+                {
+                    updateId = current.SerialNumber;
+                    //string testid = current.CustomerId.ToString();
+                    //messageDialog = new MessageDialog(testid, "cid");
+                    //await messageDialog.ShowAsync();
+
+                    //pizzaOrderList.RemoveAt(index);
+                    if (current.CustomerId == 0)
+                    {
+                        tbCustomerId.Text = current.CustomerId.ToString();
+                    }
+                    else
+                    {
+                        tbCustomerId.Text = "";
+                    }
+
+                    if (current.CustomerName != null)
+                    {
+                        tbCustomerName.Text = current.CustomerName;
+                    }
+                            
+                    if (current.IsDelivery == true)
+                    {
+                        chkDelivery.IsChecked = true;
+                    }
+                    else
+                    {
+                        chkDelivery.IsChecked = false;
+                    }
+                    if(current.PhoneNumber != null)
+                    {
+                        tbPhoneNumber.Text = current.PhoneNumber;
+                    }
+                
+                    if(current.DeliveryAddress != null)
+                    {
+                        tbDeliveryAddress.Text = current.DeliveryAddress;
+                    }
+                
+
+                    if (current.Size == "Small")
+                    {
+                        rbSmall.IsChecked = true;
+                    }
+                    else if (current.Size == "Medium")
+                    {
+                        rbMedium.IsChecked = true;
+                    }
+                    else if (current.Size == "Large")
+                    {
+                        rbLarge.IsChecked = true;
+                    }             
+                    //UncheckAllCheckBoxes();
+                    //string[] toppings = current.Toppings.Split(" ");
+
+                    //foreach (string data1 in toppings)
+                    //{
+                    //    //messageDialog = new MessageDialog(data1, "aaa");
+                    //    //await messageDialog.ShowAsync();
+                    //    if (data1 == "Pepperoni")
+                    //    {
+                    //        chkPepperoni.IsChecked = true;
+                    //    }
+                    //    else if(data1 == "Mushrooms")
+                    //    {
+                    //        chkMushrooms.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Onion")
+                    //    {
+                    //        chkOnion.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Sausage")
+                    //    {
+                    //        chkSausage.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Bacon")
+                    //    {
+                    //        chkBacon.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Extra")
+                    //    {
+                    //        chkExtraCheese.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Black")
+                    //    {
+                    //        chkBlackOlives.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Green")
+                    //    {
+                    //        chkGreenPeppers.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Pineapple")
+                    //    {
+                    //        chkPineapple.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Spiniach")
+                    //    {
+                    //        chkSpiniach.IsChecked = true;
+                    //    }
+                    //    else if (data1 == "Broccoli")
+                    //    {
+                    //        chkBroccoli.IsChecked = true;
+                    //    }
+
+                    //}
+                    CalculatePriceOfSelectedOrder(current);
+
+                }
+            }
+        }
+
+        private void UncheckAllCheckBoxes()
+        {
+            chkPepperoni.IsChecked = false;
+            chkMushrooms.IsChecked = false;
+            chkOnion.IsChecked = false;
+            chkBacon.IsChecked = false;
+            chkSausage.IsChecked = false;
+            chkExtraCheese.IsChecked = false;
+            chkBlackOlives.IsChecked = false;
+            chkGreenPeppers.IsChecked = false;
+            chkPineapple.IsChecked = false;
+            chkSpiniach.IsChecked = false;
+            chkBroccoli.IsChecked = false;
+            chkOnion.IsChecked = false;
+        }
+
+        private void CalculatePriceOfSelectedOrder(PizzaOrder current)
+        {
+            double rate = 0;
+           
+
+            if (current.Size == "Small")
+            {
+                rate =  FindPizzaRate(1);
+            }
+            else if(current.Size == "Medium")
+            {
+                rate = FindPizzaRate(2);
+            }
+            else if(current.Size == "Large")
+            {
+                rate = FindPizzaRate(3);
+            }
+            currentPizzaBasePrice = rate;
+
+            
+            UncheckAllCheckBoxes();
+
+            //Calculate the topping rate
+            string[] toppings = current.Toppings.Split(" ");
+
+            
+            currentToppingPrice = 0;
+            foreach (string data1 in toppings)
+            {
+                double tRate = 0;
+                //messageDialog = new MessageDialog(data1, "aaa");
+                //await messageDialog.ShowAsync();
+                if (data1 == "Pepperoni")
+                {
+                    chkPepperoni.IsChecked = true;
+                    tRate = FindToppingRate(1);
+                }
+                else if (data1 == "Mushrooms")
+                {
+                    chkMushrooms.IsChecked = true;
+                    tRate = FindToppingRate(2);
+                }
+                else if (data1 == "Onion")
+                {
+                    chkOnion.IsChecked = true;
+                    tRate = FindToppingRate(3);
+                }
+                else if (data1 == "Sausage")
+                {
+                    chkSausage.IsChecked = true;
+                    tRate = FindToppingRate(4);
+                }
+                else if (data1 == "Bacon")
+                {
+                    chkBacon.IsChecked = true;
+                    tRate = FindToppingRate(5);
+                }
+                else if (data1 == "Extra")
+                {
+                    chkExtraCheese.IsChecked = true;
+                    tRate = FindToppingRate(6);
+                }
+                else if (data1 == "Black")
+                {
+                    chkBlackOlives.IsChecked = true;
+                    tRate = FindToppingRate(7);
+                }
+                else if (data1 == "Green")
+                {
+                    chkGreenPeppers.IsChecked = true;
+                    tRate = FindToppingRate(8);
+                }
+                else if (data1 == "Pineapple")
+                {
+                    chkPineapple.IsChecked = true;
+                    tRate = FindToppingRate(9);
+                }
+                else if (data1 == "Spiniach")
+                {
+                    chkSpiniach.IsChecked = true;
+                    tRate = FindToppingRate(10);
+                }
+                else if (data1 == "Broccoli")
+                {
+                    chkBroccoli.IsChecked = true;
+                    tRate = FindToppingRate(11);
+                }
+                currentToppingPrice += tRate;
+            }
+
+
+            TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+            TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+
+            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+
         }
     }
 }

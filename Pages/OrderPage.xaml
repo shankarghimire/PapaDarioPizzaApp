@@ -132,14 +132,14 @@
                     Background="Blue"
                     Foreground="White"
                     FontWeight="bold"
-                    CornerRadius="5"/>
+                    CornerRadius="5" Click="btnUpdate_Click"/>
             <Button x:Name="btnDelete" 
                     Content="Delete"
                     Width="100" Margin="5,0,5,0"
                     Background="Blue"
                     Foreground="White"
                     FontWeight="bold"
-                    CornerRadius="5"/>
+                    CornerRadius="5" Click="btnDelete_Click"/>
             <Button x:Name="btnReset" 
                     Content="Reset"
                     Width="100" Margin="5,0,5,0"
@@ -314,7 +314,7 @@
                 BackgroundSizing="InnerBorderEdge"
                 GridLinesVisibility="All" 
                 IsReadOnly="True" 
-                Height="398"                            
+                Height="398" SelectionChanged="dataGridViewOrder_SelectionChanged"                            
                 />
         </StackPanel>
         <StackPanel Grid.Row="10"
