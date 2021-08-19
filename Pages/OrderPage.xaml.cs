@@ -219,10 +219,7 @@ namespace PapaDarioPizzaApp.Pages
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
-            //Resetns the variables
-            currentPizzaPrice = 0;
-            currentToppingPrice = 0;
-            currentPizzaBasePrice = 0.0;
+            
 
 
             //Resents the Buttons
@@ -258,6 +255,11 @@ namespace PapaDarioPizzaApp.Pages
             TextBlock_BasePrice.Text = "Base Price: ";
             TextBlock_ToppingPrice.Text = "Topping Price : ";
             TextBlock_PizzaPrice.Text = "Pizza Price : ";
+
+            //Resetns the variables
+            currentPizzaPrice = 0;
+            currentToppingPrice = 0;
+            currentPizzaBasePrice = 0.0;
 
         }
         private async void CheckDataValidation()
@@ -657,14 +659,16 @@ namespace PapaDarioPizzaApp.Pages
 
         private void rbSmall_Click(object sender, RoutedEventArgs e)
         {
-            double rate = FindPizzaRate(1);
-            currentPizzaBasePrice = rate;
-            TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+            //double rate = FindPizzaRate(1);
+            //currentPizzaBasePrice = rate;
+            //TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
 
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            //currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
+            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
 
-           
+            CalculatePriceOfSelectedSizeAndToppings();
+
+
 
         }
         private void UpdatePrice()
@@ -675,52 +679,47 @@ namespace PapaDarioPizzaApp.Pages
 
         private void rbMedium_Click(object sender, RoutedEventArgs e)
         {
-            double rate = FindPizzaRate(2);
-            currentPizzaBasePrice = rate;
-            TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+            CalculatePriceOfSelectedSizeAndToppings();
 
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            //double rate = FindPizzaRate(2);
+            //currentPizzaBasePrice = rate;
+            //TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+
+            //currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
+            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
         }
 
         private void rbLarge_Click(object sender, RoutedEventArgs e)
         {
-            double rate = FindPizzaRate(3);
-            currentPizzaBasePrice = rate;
-            TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+            CalculatePriceOfSelectedSizeAndToppings();
 
-            ///TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            /// currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            //double rate = FindPizzaRate(3);
+            //currentPizzaBasePrice = rate;
+            //TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+
+            /////TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
+            ///// currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
+            //currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
+            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
         }
 
         private void chkPepperoni_Click(object sender, RoutedEventArgs e)
         {
+           
+
             double toppingRate = FindToppingRate(1);
-            if(chkPepperoni.IsChecked == true)
+            if (chkPepperoni.IsChecked == true)
             {
                 currentToppingPrice = currentToppingPrice + toppingRate;
             }
-            else 
+            else
             {
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
-
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
 
-            if (currentToppingPrice == 0.0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            CalculatePriceOfSelectedSizeAndToppings();
+       
         }
         private void FindTotalToppingPrice()
         {
@@ -729,6 +728,9 @@ namespace PapaDarioPizzaApp.Pages
 
         private void chkMushrooms_Click(object sender, RoutedEventArgs e)
         {
+
+           
+
             double toppingRate = FindToppingRate(2);
             if (chkMushrooms.IsChecked == true)
             {
@@ -739,22 +741,16 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            CalculatePriceOfSelectedSizeAndToppings();
+           
         }
 
         private void chkOnion_Click(object sender, RoutedEventArgs e)
         {
+
+            
+
             double toppingRate = FindToppingRate(3);
             if (chkOnion.IsChecked == true)
             {
@@ -766,18 +762,11 @@ namespace PapaDarioPizzaApp.Pages
             }
 
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            CalculatePriceOfSelectedSizeAndToppings();
+
+            
+
         }
 
         private void chkSausage_Click(object sender, RoutedEventArgs e)
@@ -792,18 +781,10 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            CalculatePriceOfSelectedSizeAndToppings();
+
+           
         }
 
         private void chkBacon_Click(object sender, RoutedEventArgs e)
@@ -818,18 +799,10 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            CalculatePriceOfSelectedSizeAndToppings();
+
+           
         }
 
         private void chkExtraCheese_Click(object sender, RoutedEventArgs e)
@@ -844,18 +817,10 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
+            CalculatePriceOfSelectedSizeAndToppings();
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+
+           
         }
 
         private void chkBlackOlives_Click(object sender, RoutedEventArgs e)
@@ -870,18 +835,9 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
+            CalculatePriceOfSelectedSizeAndToppings();
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            
         }
 
         private void chkGreenPeppers_Click(object sender, RoutedEventArgs e)
@@ -896,18 +852,9 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
+            CalculatePriceOfSelectedSizeAndToppings();
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+           
         }
 
         private void chkPineapple_Click(object sender, RoutedEventArgs e)
@@ -922,18 +869,10 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
+            CalculatePriceOfSelectedSizeAndToppings();
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+
+           
         }
 
         private void chkSpiniach_Click(object sender, RoutedEventArgs e)
@@ -948,18 +887,11 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+            CalculatePriceOfSelectedSizeAndToppings();
+
+
+            
         }
 
         private void chkBroccoli_Click(object sender, RoutedEventArgs e)
@@ -974,18 +906,9 @@ namespace PapaDarioPizzaApp.Pages
                 currentToppingPrice = currentToppingPrice - toppingRate;
             }
             currentToppingPrice = Math.Round(currentToppingPrice, 2);
-            if (currentToppingPrice == 0)
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
-            else
-            {
-                TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
-            }
+            CalculatePriceOfSelectedSizeAndToppings();
 
-            //TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaBasePrice + currentToppingPrice).ToString("0.00");
-            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
-            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+
         }
 
         private void btnSubmitOrder_Click(object sender, RoutedEventArgs e)
@@ -1030,6 +953,10 @@ namespace PapaDarioPizzaApp.Pages
 
             //messageDialog = new MessageDialog(index.ToString(), "select index");
             //await messageDialog.ShowAsync();
+
+            UncheckAllCheckBoxes();
+            UncheckAllRatioButtons();
+            ResetTextBlockForEachOrder();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -1201,60 +1128,60 @@ namespace PapaDarioPizzaApp.Pages
                     else if (current.Size == "Large")
                     {
                         rbLarge.IsChecked = true;
-                    }             
-                    //UncheckAllCheckBoxes();
-                    //string[] toppings = current.Toppings.Split(" ");
+                    }
+                    UncheckAllCheckBoxes();
+                    string[] toppings = current.Toppings.Split(" ");
 
-                    //foreach (string data1 in toppings)
-                    //{
-                    //    //messageDialog = new MessageDialog(data1, "aaa");
-                    //    //await messageDialog.ShowAsync();
-                    //    if (data1 == "Pepperoni")
-                    //    {
-                    //        chkPepperoni.IsChecked = true;
-                    //    }
-                    //    else if(data1 == "Mushrooms")
-                    //    {
-                    //        chkMushrooms.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Onion")
-                    //    {
-                    //        chkOnion.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Sausage")
-                    //    {
-                    //        chkSausage.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Bacon")
-                    //    {
-                    //        chkBacon.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Extra")
-                    //    {
-                    //        chkExtraCheese.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Black")
-                    //    {
-                    //        chkBlackOlives.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Green")
-                    //    {
-                    //        chkGreenPeppers.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Pineapple")
-                    //    {
-                    //        chkPineapple.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Spiniach")
-                    //    {
-                    //        chkSpiniach.IsChecked = true;
-                    //    }
-                    //    else if (data1 == "Broccoli")
-                    //    {
-                    //        chkBroccoli.IsChecked = true;
-                    //    }
+                    foreach (string data1 in toppings)
+                    {
+                        //messageDialog = new MessageDialog(data1, "aaa");
+                        //await messageDialog.ShowAsync();
+                        if (data1 == "Pepperoni")
+                        {
+                            chkPepperoni.IsChecked = true;
+                        }
+                        else if (data1 == "Mushrooms")
+                        {
+                            chkMushrooms.IsChecked = true;
+                        }
+                        else if (data1 == "Onion")
+                        {
+                            chkOnion.IsChecked = true;
+                        }
+                        else if (data1 == "Sausage")
+                        {
+                            chkSausage.IsChecked = true;
+                        }
+                        else if (data1 == "Bacon")
+                        {
+                            chkBacon.IsChecked = true;
+                        }
+                        else if (data1 == "Extra")
+                        {
+                            chkExtraCheese.IsChecked = true;
+                        }
+                        else if (data1 == "Black")
+                        {
+                            chkBlackOlives.IsChecked = true;
+                        }
+                        else if (data1 == "Green")
+                        {
+                            chkGreenPeppers.IsChecked = true;
+                        }
+                        else if (data1 == "Pineapple")
+                        {
+                            chkPineapple.IsChecked = true;
+                        }
+                        else if (data1 == "Spiniach")
+                        {
+                            chkSpiniach.IsChecked = true;
+                        }
+                        else if (data1 == "Broccoli")
+                        {
+                            chkBroccoli.IsChecked = true;
+                        }
 
-                    //}
+                    }
                     CalculatePriceOfSelectedOrder(current);
 
                 }
@@ -1277,6 +1204,20 @@ namespace PapaDarioPizzaApp.Pages
             chkOnion.IsChecked = false;
         }
 
+        private void UncheckAllRatioButtons()
+        {
+            rbSmall.IsChecked = false;
+            rbMedium.IsChecked = false;
+            rbLarge.IsChecked = false;
+        }
+
+        private void ResetTextBlockForEachOrder()
+        {
+            TextBlock_BasePrice.Text = "Base Price : ";
+            TextBlock_ToppingPrice.Text = "Topping Price : ";
+            TextBlock_PizzaPrice.Text = "Pizza Price : ";
+        }
+
         private void CalculatePriceOfSelectedOrder(PizzaOrder current)
         {
             double rate = 0;
@@ -1284,14 +1225,17 @@ namespace PapaDarioPizzaApp.Pages
 
             if (current.Size == "Small")
             {
+                rbSmall.IsChecked = true;
                 rate =  FindPizzaRate(1);
             }
             else if(current.Size == "Medium")
             {
+                rbMedium.IsChecked = true;
                 rate = FindPizzaRate(2);
             }
             else if(current.Size == "Large")
             {
+                rbLarge.IsChecked = true;
                 rate = FindPizzaRate(3);
             }
             currentPizzaBasePrice = rate;
@@ -1374,6 +1318,114 @@ namespace PapaDarioPizzaApp.Pages
             currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
             TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
 
+        }
+
+
+        private void CalculatePriceOfSelectedSizeAndToppings()
+        {
+            double rate = 0;
+
+            if (rbSmall.IsChecked == true)
+            {
+                rate = FindPizzaRate(1);
+            }
+            else if(rbMedium.IsChecked == true)
+            {
+                rate = FindPizzaRate(2);
+            }
+            else if(rbLarge.IsChecked == true)
+            {
+                rate = FindPizzaRate(3);
+            }
+          
+            currentPizzaBasePrice = rate;
+
+
+            //UncheckAllCheckBoxes();
+
+            //Calculate the topping rate
+            //string[] toppings = current.Toppings.Split(" ");
+
+
+            //currentToppingPrice = 0;
+            //foreach (string data1 in toppings)
+            //{
+            //    double tRate = 0;
+            //    //messageDialog = new MessageDialog(data1, "aaa");
+            //    //await messageDialog.ShowAsync();
+            //    if (chkPepperoni.IsChecked == true)
+            //    {
+                   
+            //        tRate = FindToppingRate(1);
+            //    }
+
+            //    else if (chkMushrooms.IsChecked == true)
+            //    {
+                    
+            //        tRate = FindToppingRate(2);
+            //    }
+            //    else if (chkOnion.IsChecked == true)
+            //    {
+                    
+            //        tRate = FindToppingRate(3);
+            //    }
+            //    else if (chkSausage.IsChecked == true)
+            //    {
+                    
+            //        tRate = FindToppingRate(4);
+            //    }
+            //    else if (chkSausage.IsChecked == true)
+            //    {
+                   
+            //        tRate = FindToppingRate(5);
+            //    }
+            //    else if (chkExtraCheese.IsChecked == true)
+            //    {
+                    
+            //        tRate = FindToppingRate(6);
+            //    }
+            //    else if (chkBlackOlives.IsChecked == true)
+            //    {
+                    
+            //        tRate = FindToppingRate(7);
+            //    }
+            //    else if (chkGreenPeppers.IsChecked == true)
+            //    {
+                   
+            //        tRate = FindToppingRate(8);
+            //    }
+            //    else if (chkPineapple.IsChecked == true)
+            //    {
+                    
+            //        tRate = FindToppingRate(9);
+            //    }
+            //    else if (chkSpiniach.IsChecked == true)
+            //    {
+                    
+            //        tRate = FindToppingRate(10);
+            //    }
+            //    else if (chkBroccoli.IsChecked == true)
+            //    {
+                    
+            //        tRate = FindToppingRate(11);
+            //    }
+            //    currentToppingPrice += tRate;
+            ////}
+
+
+            TextBlock_BasePrice.Text = "Base Price = " + currentPizzaBasePrice.ToString("0.00");
+            TextBlock_ToppingPrice.Text = "Topping Price = " + currentToppingPrice.ToString("0.00");
+
+            currentPizzaPrice = currentPizzaBasePrice + currentToppingPrice;
+            TextBlock_PizzaPrice.Text = "Price = " + (currentPizzaPrice).ToString("0.00");
+
+        }
+
+        private void dataGridViewOrder_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //rbSmall.IsChecked = false;
+            //rbMedium.IsChecked = false;
+            //rbLarge.IsChecked = false;
         }
     }
 }

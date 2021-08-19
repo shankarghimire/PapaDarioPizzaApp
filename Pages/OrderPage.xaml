@@ -206,7 +206,7 @@
                     <CheckBox Grid.Row="0"
                               Grid.Column="0"
                               x:Name="chkPepperoni"
-                              Content="Pepperoni" Click="chkPepperoni_Click"
+                              Content="Pepperoni" Click="chkPepperoni_Click" Margin="0,0,0,22" Grid.RowSpan="2" VerticalAlignment="Bottom"
                               />
 
                     <CheckBox Grid.Row="1"
@@ -314,7 +314,7 @@
                 BackgroundSizing="InnerBorderEdge"
                 GridLinesVisibility="All" 
                 IsReadOnly="True" 
-                Height="398" SelectionChanged="dataGridViewOrder_SelectionChanged"                            
+                Height="398" SelectionChanged="dataGridViewOrder_SelectionChanged" LostFocus="dataGridViewOrder_LostFocus"                            
                 />
         </StackPanel>
         <StackPanel Grid.Row="10"
