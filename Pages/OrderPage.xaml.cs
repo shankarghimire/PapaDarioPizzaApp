@@ -1463,7 +1463,15 @@ namespace PapaDarioPizzaApp.Pages
                 {
                     totalAmount += item.Price;
                 }
-                discountAmount = 0.0;
+                if(UserInfo.LoginStatus == true)
+                {
+                    discountAmount = totalAmount * 0.1;
+                }
+                else
+                {
+                    discountAmount = 0.0;
+                }
+                
                 grandTotalAmount = totalAmount - discountAmount;
                 TextBlock_TotalAmount.Text = "Total = " + totalAmount.ToString("0.00");
                 TextBlock_DiscountAmount.Text = "Discount = " + discountAmount.ToString("0.00");

@@ -192,7 +192,7 @@ namespace PapaDarioPizzaApp.Pages
 
         private async void tbUserId_LostFocus(object sender, RoutedEventArgs e)
         {
-            ValidateUserInput();
+            //ValidateUserInput();
             string connectionString = DBConnnection.GetConnectionString();
             SqlConnection conn = new SqlConnection(connectionString);
             string userId = tbUserId.Text;
@@ -204,6 +204,7 @@ namespace PapaDarioPizzaApp.Pages
                 int result = Convert.ToInt32(cmd.ExecuteScalar());
                 if(result == 1)
                 {
+                    
                     string message = "The UserId '" + userId + "' has been already taken!, Please try different one!";
                     string caption = "Data Validation Error";
                     messageDialog = new MessageDialog(message, caption);
