@@ -25,6 +25,16 @@ namespace PapaDarioPizzaApp
         public CustomerPage()
         {
             this.InitializeComponent();
+            //if(UserInfo.LoginStatus == true)
+            //{
+            //    this.btnLogIn.Content = "Log Out";
+            //}
+            //else
+            //{
+            //    this.btnLogIn.Content = "Log In";
+            //}
+            UserInfo.ChangeToLogOut(this);
+            
         }
 
         private void btnGotoHome_Click(object sender, RoutedEventArgs e)
@@ -39,12 +49,25 @@ namespace PapaDarioPizzaApp
 
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            frameCustomerPage.Navigate(typeof(Pages.LogInPage));
+           
+            frameCustomerPage.Navigate(typeof(WelcomePage));
         }
 
-        private void btnSignUp_Click(object sender, RoutedEventArgs e)
+        //private void btnSignUp_Click(object sender, RoutedEventArgs e)
+        //{
+        //    frameCustomerPage.Navigate(typeof(Pages.SignUpPage));
+        //}
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            frameCustomerPage.Navigate(typeof(Pages.LogOutPage));
+            if(UserInfo.LoginStatus == true)
+            {
+                this.btnLogIn.Content = "Log Out";
+            }
+            else
+            {
+                this.btnLogIn.Content = "Log In";
+            }
         }
 
         //private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)

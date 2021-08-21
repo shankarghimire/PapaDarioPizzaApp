@@ -11,7 +11,7 @@ namespace PapaDarioPizzaApp
         public int OrderNumber { get; set; }
         public int SerialNumber { get; set; }
         public DateTime OrderDate { get; set; }
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string IsDelivery { get; set; }
         public string PhoneNumber { get; set; }

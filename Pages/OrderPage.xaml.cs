@@ -51,7 +51,7 @@ namespace PapaDarioPizzaApp.Pages
         private bool receiptReadyToPrint = false;
 
         //Log in user info
-        private UserInfo userInfo = new UserInfo();
+        //private UserInfo userInfo = new UserInfo();
         public OrderPage()
         {
             this.InitializeComponent();
@@ -76,6 +76,17 @@ namespace PapaDarioPizzaApp.Pages
             DisableUIElements();
             LoadPizzaRate();
             LoadToppingRate();
+
+           if(UserInfo.LoginStatus == true)
+            {
+                this.btnLogIn.Content = "Log Out";
+            }
+            else
+            {
+                this.btnLogIn.Content = "Log In";
+            }
+           this.TextBlock_FooterInfo.Text += "User Id: " + UserInfo.UserId + ", User Name: " + UserInfo.UserName;
+            
         }
 
         private void chkDelivery_Checked(object sender, RoutedEventArgs e)
@@ -223,11 +234,19 @@ namespace PapaDarioPizzaApp.Pages
             TextBlock_ToppingPrice.Text = "Topping Price : ";
 
             //User Info 
-            User currentUser = (User)userInfo.GetLoggedInUser();
+            //User currentUser = new User();// (User)UserInfo.GetLoggedInUser("Guest","Guest");
+            //if(UserInfo.LoginStatus == true)
+            //{
+            //    currentUser=UserInfo.GetLoggedInUser("test", "test");
+            //}
+            //else
+            //{
+            //    currentUser=UserInfo.DefaultUserInfo();
+            //}
 
             //Resets all TextBox           
-            tbCustomerId.Text = currentUser.UserId.ToString();
-            tbCustomerName.Text = currentUser.UserName;           
+            tbCustomerId.Text = UserInfo.UserId;
+            tbCustomerName.Text = UserInfo.UserName;           
             chkDelivery.IsChecked = false;
             tbPhoneNumber.Text = "";
             tbDeliveryAddress.Text = "";
@@ -403,8 +422,8 @@ namespace PapaDarioPizzaApp.Pages
 
             //Default CustomerId and Name
             //will be changged later as log in 
-            temp.CustomerId = 1;
-            temp.CustomerName = "Guest";
+            temp.CustomerId = UserInfo.UserId;
+            temp.CustomerName = UserInfo.UserName;
 
             //temp.OrderDate = Convert.ToDateTime(PizzaOrderDate.Date);
             serialNumber += 1;
@@ -504,7 +523,15 @@ namespace PapaDarioPizzaApp.Pages
             {
                 totalAmount += item.Price;
             }
-            discountAmount = 0.0;
+            if(UserInfo.LoginStatus == true)
+            {
+                discountAmount = totalAmount * 0.1;
+            }
+            else
+            {
+                discountAmount = 0.0;
+            }
+            
             grandTotalAmount = totalAmount - discountAmount;
             TextBlock_TotalAmount.Text = "Total = " + totalAmount.ToString("0.00");
             TextBlock_DiscountAmount.Text = "Discount = " + discountAmount.ToString("0.00");
@@ -1127,7 +1154,7 @@ namespace PapaDarioPizzaApp.Pages
         {
             var orderUpdate = pizzaOrderList.Single(tempOrder => tempOrder.SerialNumber == updateId);
 
-            orderUpdate.CustomerId = Convert.ToInt32(tbCustomerId.Text);
+            orderUpdate.CustomerId = tbCustomerId.Text;
             orderUpdate.CustomerName = tbCustomerName.Text;
             if(chkDelivery.IsChecked == true)
             {
@@ -1248,18 +1275,19 @@ namespace PapaDarioPizzaApp.Pages
                     //await messageDialog.ShowAsync();
 
                     //pizzaOrderList.RemoveAt(index);
-                    if (current.CustomerId == 0)
-                    {
-                        tbCustomerId.Text = current.CustomerId.ToString();
-                    }
-                    else
-                    {
-                        tbCustomerId.Text = "";
-                    }
+                    tbCustomerId.Text = UserInfo.UserId;
+                    //if (current.CustomerId == 0)
+                    //{
+                    //    tbCustomerId.Text = current.CustomerId.ToString();
+                    //}
+                    //else
+                    //{
+                    //    tbCustomerId.Text = "";
+                    //}
 
                     if (current.CustomerName != null)
                     {
-                        tbCustomerName.Text = current.CustomerName;
+                        tbCustomerName.Text = UserInfo.UserName;
                     }
                             
                     if (current.IsDelivery == "Yes")
@@ -1590,6 +1618,16 @@ namespace PapaDarioPizzaApp.Pages
             //rbSmall.IsChecked = false;
             //rbMedium.IsChecked = false;
             //rbLarge.IsChecked = false;
+        }
+
+        private void btnLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(WelcomePage));
+        }
+
+        private void btnGotoHome_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }

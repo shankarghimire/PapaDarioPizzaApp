@@ -6,9 +6,93 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
-    <Grid>
-
+    <Grid Margin="0,100,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <RelativePanel Grid.Row="0"
+                       Grid.ColumnSpan="3"
+                       Background="Green"
+                       >
+            <TextBlock 
+                Text="☺Please Log In to App for the Exclusive Offer!☺"
+                TextAlignment="Center"
+                Foreground="White"
+                FontWeight="bold"
+                FontSize="20"
+                Margin="350,10,0,0"                
+                />
+        </RelativePanel>
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+            <TextBlock Text="User Id : "
+                       Width="150"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <TextBox x:Name="tbUserId"
+                       Margin="10, 5, 0, 5 "
+                       FontSize="16"
+                       BorderThickness="2 2 2 4"
+                       BorderBrush="Green"
+                       Width="350"                           
+                     />
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+            <TextBlock Text="Password : "
+                       Width="150"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <PasswordBox x:Name="pbPassword"
+                       Margin="10, 5, 0, 5 "
+                       FontSize="16"
+                       BorderThickness="2 2 2 4"
+                       BorderBrush="Green"
+                       Width="350"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left">
+            <Button Content="Log In"
+                    Margin="120, 5, 10, 5"
+                    x:Name="btnLogIn"
+                    FontWeight="Bold"
+                    Background="Blue"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="200"
+                    Height="50"
+                    CornerRadius="10" Click="btnLogIn_Click"/>
+            <Button Content="Cancel"
+                    Margin="10, 5, 10, 5"
+                    x:Name="btnCancel"
+                    FontWeight="Bold"
+                    Background="Blue"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="200"
+                    Height="50"
+                    CornerRadius="10" Click="btnCancel_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

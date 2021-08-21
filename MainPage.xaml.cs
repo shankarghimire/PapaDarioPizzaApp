@@ -77,7 +77,8 @@ namespace PapaDarioPizzaApp
 
         private void btnLoginGuest_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CustomerPage));
+            //Frame.Navigate(typeof(CustomerPage));
+            Frame.Navigate(typeof(WelcomePage));
         }
 
         private void btnLoginAdmin_Click(object sender, RoutedEventArgs e)

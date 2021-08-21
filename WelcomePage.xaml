@@ -1,0 +1,189 @@
+﻿<Page
+    x:Class="PapaDarioPizzaApp.WelcomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PapaDarioPizzaApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <RelativePanel Grid.Row="0"
+                       Grid.ColumnSpan="3"
+                       Background="Green"
+                       
+                       >
+            <TextBlock 
+                Text="☺Welcome to Customer Page!☺"
+                TextAlignment="Center"
+                Foreground="White"
+                FontWeight="bold"
+                FontSize="20"
+                Margin="600,5,0,0"                
+                />
+        </RelativePanel>
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button x:Name="btnContinueAsGuest"
+                    Content="Continue To App As Guest User" 
+                    Margin="10 2 10 2 "                
+                    FontSize="20"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="0"
+                    Width="400"
+                    Height="40"
+                    CornerRadius="5"
+                    Click="btnContinueAsGuest_Click"
+                    >
+                
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            <Button x:Name="btnSignUp"
+                    Margin="10 2 10 2 "
+                    Content="Customer Register"
+                    FontSize="20"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="0"
+                    Width="400"
+                    Height="40"
+                    CornerRadius="5" Click="btnSignUp_Click" 
+                 />
+
+        </StackPanel>
+        <RelativePanel Grid.Row="4"
+                       Grid.ColumnSpan="3"
+                       Background="Green"
+                       >
+            <TextBlock 
+                Text="☺Please Log In to App for the Exclusive Offer!☺"
+                TextAlignment="Center"
+                Foreground="White"
+                FontWeight="bold"
+                FontSize="20"
+                Margin="600,5,0,0"                
+                />
+        </RelativePanel>
+        
+        <StackPanel Grid.Row="5"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="User Id : "
+                       Width="150"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <TextBox x:Name="tbUserId"
+                       Margin="10, 5, 0, 5 "
+                       FontSize="16"
+                       BorderThickness="2 2 2 4"
+                       BorderBrush="Green"
+                       Width="350"                           
+                     />
+        </StackPanel>
+        <StackPanel Grid.Row="6"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Password : "
+                       Width="150"
+                       TextAlignment="Right"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <PasswordBox x:Name="pbPassword"
+                       Margin="10, 5, 0, 5 "
+                       FontSize="16"
+                       BorderThickness="2 2 2 4"
+                       BorderBrush="Green"
+                       Width="350"/>
+        </StackPanel>
+        <StackPanel Grid.Row="7"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="Log In"
+                    Margin="120, 5, 10, 5"
+                    x:Name="btnLogIn"
+                    FontWeight="Bold"
+                    Background="Blue"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="200"
+                    Height="50"
+                    CornerRadius="10" Click="btnLogIn_Click" 
+                    />
+            <Button Content="Cancel"
+                    Margin="10, 5, 10, 5"
+                    x:Name="btnCancel"
+                    FontWeight="Bold"
+                    Background="Blue"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="200"
+                    Height="50"
+                    CornerRadius="10" Click="btnCancel_Click" 
+                    />
+        </StackPanel>
+        <RelativePanel Grid.Row="8"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       Background="Green"
+                       >
+            <TextBlock
+                Margin="100,0,0,0"
+                Text="Today's Special Items"
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="16"></TextBlock>
+        </RelativePanel>
+        <ScrollViewer Grid.Row="9"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                    <Image Margin="50,10,50,10" Source="Assets/images/p2.jpg" Width="250" ></Image>
+                    <Image Margin="50,10,50,10" Source="Assets/images/pineapple-pizza.jpg" Width="250"></Image>
+                    <Image Margin="50,10,50,10" Source="Assets/images/topping1.jpg" Width="250"></Image>
+                    <Image Margin="50,10,50,10" Source="Assets/images/pizza_fresca.jpg" Width="250"></Image>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                    <Image Margin="50,10,50,10" Source="Assets/images/momo1.jpg" Width="250"></Image>
+                    <Image Margin="50,10,50,10" Source="Assets/images/momo2.jpg" Width="250"></Image>
+                    <Image Margin="50,10,50,10" Source="Assets/images/momo3.jpg" Width="250"></Image>
+                    <Image Margin="50,10,50,10" Source="Assets/images/Nepali_Momo.jpg" Width="250"></Image>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -9,14 +9,19 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
-    <Grid Margin="0, 100,0,0">
+    <Grid Margin="0, 10,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="450"/>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+          
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
@@ -27,7 +32,7 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <RelativePanel Grid.Row="0" 
@@ -36,14 +41,109 @@
                        Background="green">
             <TextBlock
                 x:Name="TextBlock_AppTitle"
+                Margin="600 5 100 5"
+                Text="Papa Dario Pizza App"
+                FontSize="30"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Center"/>
+        </RelativePanel>
+      
+        <!--<StackPanel 
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Orientation="Horizontal"
+           HorizontalAlignment="Left">
+                <Button x:Name="btnGotoHome"
+                    Content="Goto Login Page"
+                     Margin="20 2 10 2 "               
+                    FontSize="20"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="0"
+                    Width="200"
+                    Height="40"
+                    CornerRadius="5" 
+                             
+                        />
+            </StackPanel>-->
+
+            <StackPanel  
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Orientation="Horizontal" >
+            <Button x:Name="btnGotoHome"
+                    Content="Goto Home Page"
+                     Margin="20 2 10 2 "               
+                    FontSize="18"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="0"
+                    Width="200"
+                    Height="30"
+                    CornerRadius="5" Click="btnGotoHome_Click" 
+                             
+                        />
+            <!--<Button x:Name="btnOrder"
+                    Margin="350 2 10 2 "
+                    Content="Order Pizza"
+                    FontSize="20"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="0"
+                    Width="200"
+                    Height="40"
+                    CornerRadius="5" 
+                         
+                />-->
+                <Button x:Name="btnLogIn"
+                        x:FieldModifier="public"
+                    Margin="10 2 10 2 "
+                    Content="Log In "
+                    FontSize="18"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="0"
+                    Width="250"
+                    Height="30"
+                    CornerRadius="5" Click="btnLogIn_Click" 
+                        
+                 />
+                <!--<Button x:Name="btnSignUp"
+                    Margin="10 2 10 2 "
+                    Content="Sign Up"
+                    FontSize="20"
+                    Background="Blue"
+                    Foreground="White"
+                    FontWeight="bold"
+                    Padding="0"
+                    Width="200"
+                    Height="40"
+                    CornerRadius="5" Click="btnSignUp_Click" 
+                 />-->
+            </StackPanel>
+        <RelativePanel Grid.Row="3" 
+                       Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       Background="green">
+            <TextBlock
+                x:Name="TextBlock_AppTitle2"
                 Margin="600 0 100 0"
-                Text="Order Details"
+                Text="☺🍕☺ Order Details ☺🍕☺"
                 FontSize="20"
                 FontWeight="Bold"
                 Foreground="White"
                 TextAlignment="Center"/>
         </RelativePanel>
-        <StackPanel Grid.Row="1" 
+        <StackPanel Grid.Row="5" 
                     Grid.Column="0"
                     Orientation="Horizontal"
                     VerticalAlignment="Center">
@@ -56,7 +156,7 @@
                        />
             <DatePicker x:Name="PizzaOrderDate"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" 
+        <StackPanel Grid.Row="6" 
                     Grid.Column="0"
                     Orientation="Horizontal"
                     VerticalAlignment="Center">
@@ -69,7 +169,7 @@
                      Width="300"
                      Height="30"/>
         </StackPanel>
-        <StackPanel Grid.Row="3" 
+        <StackPanel Grid.Row="7" 
                     Grid.Column="0"
                     Orientation="Horizontal"
                     VerticalAlignment="Center">
@@ -82,7 +182,7 @@
                      Width="300"
                      Height="30"/>
         </StackPanel>
-        <StackPanel Grid.Row="4"
+        <StackPanel Grid.Row="8"
                     Grid.Column="0"
                     Orientation="Horizontal"
                     VerticalAlignment="Center">
@@ -92,7 +192,7 @@
                         Padding="2"/>
             <CheckBox x:Name="chkDelivery" Checked="chkDelivery_Checked" Click="chkDelivery_Click"/>
         </StackPanel>
-        <StackPanel Grid.Row="5"
+        <StackPanel Grid.Row="9"
                     Grid.Column="0"
                     Orientation="Horizontal"
                     VerticalAlignment="Center">
@@ -103,7 +203,7 @@
             <TextBox x:Name="tbPhoneNumber"
                      Width="300"/>
         </StackPanel>
-        <StackPanel Grid.Row="6"
+        <StackPanel Grid.Row="10"
                     Grid.Column="0"
                     Orientation="Horizontal"
                     VerticalAlignment="Center">
@@ -114,7 +214,7 @@
             <TextBox x:Name="tbDeliveryAddress"
                      Width="300"/>
         </StackPanel>
-        <StackPanel Grid.Row="8"
+        <StackPanel Grid.Row="12"
                     Grid.Column="0"
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
@@ -150,7 +250,7 @@
         </StackPanel>
         
         <Border BorderThickness="2"
-                Grid.Row="1"
+                Grid.Row="5"
                 Grid.Column="1"
                 Grid.RowSpan="4"
                 BorderBrush="Gold"
@@ -159,7 +259,7 @@
                 HorizontalAlignment="Left">
 
 
-            <StackPanel Grid.Row="1"
+            <StackPanel Grid.Row="5"
                     Grid.Column="1"
                     Grid.RowSpan="3"  
                     HorizontalAlignment="Left"
@@ -179,7 +279,7 @@
 
             </StackPanel>
         </Border>
-        <Border Grid.Row="1"
+        <Border Grid.Row="5"
                 Grid.Column="1"
                 Grid.RowSpan="7"
                 BorderThickness="2"
@@ -268,7 +368,7 @@
 
             </StackPanel>
         </Border>
-        <StackPanel Grid.Row="7"
+        <StackPanel Grid.Row="11"
                     Grid.Column="1"
                     VerticalAlignment="Center">
             <TextBlock x:Name="TextBlock_BasePrice"
@@ -278,7 +378,7 @@
                        FontWeight="Bold"
                        Margin="5,0,0,0"/>
         </StackPanel>
-        <StackPanel Grid.Row="8"
+        <StackPanel Grid.Row="12"
                     Grid.Column="1"
                     VerticalAlignment="Center">
             <TextBlock x:Name="TextBlock_PizzaPrice"
@@ -288,7 +388,7 @@
                        FontWeight="Bold"
                        Margin="5,0,0,0"/>
         </StackPanel>
-        <StackPanel Grid.Row="7"
+        <StackPanel Grid.Row="11"
                     Grid.Column="2"
                     VerticalAlignment="Center">
             <TextBlock x:Name="TextBlock_ToppingPrice"
@@ -298,7 +398,7 @@
                        FontWeight="Bold"
                        Margin="5,0,0,0"/>
         </StackPanel>
-        <StackPanel Grid.Row="9"
+        <StackPanel Grid.Row="13"
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
                    
@@ -317,7 +417,7 @@
                 Height="398" SelectionChanged="dataGridViewOrder_SelectionChanged" LostFocus="dataGridViewOrder_LostFocus"                            
                 />
         </StackPanel>
-        <StackPanel Grid.Row="10"
+        <StackPanel Grid.Row="14"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button x:Name="btnSubmitOrder"
@@ -343,7 +443,7 @@
                     Width="110"
                     Margin="10,0,10,0" Click="btnNewOrder_Click"/>
         </StackPanel>
-        <StackPanel Grid.Row="10"
+        <StackPanel Grid.Row="14"
                     Grid.Column="2"
                     Grid.RowSpan="3"
                     >
@@ -358,5 +458,31 @@
                        FontSize="15"/>
 
         </StackPanel>
+        <RelativePanel Grid.Row="16" 
+                       Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       Background="green">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                x:Name="TextBlock_FooterInfo"
+                Margin="200 0 0 0"
+                Padding="0 5 0 0"
+                Text="You are logged in as: "
+                FontSize="12"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Center"/>
+                <TextBlock
+                x:Name="TextBlock_FooterInfo2"
+                Margin="650 0 0 0"
+                Padding="0 5 0 0"
+                Text="Copy Right @Papa Dario Pizza:2021"
+                FontSize="12"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Right"/>
+            </StackPanel>
+            
+        </RelativePanel>
     </Grid>
 </Page>

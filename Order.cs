@@ -10,7 +10,7 @@ namespace PapaDarioPizzaApp
     {
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public string PhoneNumber { get; set; }
         public string IsDelivery { get; set; }
         public string DeliveryAddress { get; set; }
@@ -18,7 +18,7 @@ namespace PapaDarioPizzaApp
         public double Discount { get; set; }
         public double GrandTotal { get; set; }
         public Order() { }
-        public Order(int orderId,DateTime orderDate, int customerId,string phoneNumber, string isDelivery, string deliveryAddress, double totalPrice, double discount, double grandTotal)
+        public Order(int orderId,DateTime orderDate, string customerId,string phoneNumber, string isDelivery, string deliveryAddress, double totalPrice, double discount, double grandTotal)
         {
             this.OrderId = orderId;
             this.OrderDate = orderDate;

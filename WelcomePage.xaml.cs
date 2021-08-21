@@ -14,33 +14,42 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Data.SqlClient;
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace PapaDarioPizzaApp.Pages
+namespace PapaDarioPizzaApp
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LogInPage : Page
+    public sealed partial class WelcomePage : Page
     {
         MessageDialog messageDialog;
-
-        //private UserInfo currentUser = new UserInfo();
-        public LogInPage()
+        public WelcomePage()
         {
             this.InitializeComponent();
         }
 
+        private void btnGoToOrderPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CustomerPage));
+        }
+
+        private void btnContinueAsGuest_Click(object sender, RoutedEventArgs e)
+        {
+            UserInfo.DefaultUserInfo();
+            Frame.Navigate(typeof(Pages.OrderPage));
+        }
+
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Pages.OrderPage));
+
         }
 
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
             ValidateUserInput();
             CheckUserCredentials();
-
         }
         private async void ValidateUserInput()
         {
@@ -77,30 +86,30 @@ namespace PapaDarioPizzaApp.Pages
                 bool result = false;
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-               
+
                 while (reader.Read())
                 {
                     string userId2 = reader["UserId"].ToString();
                     string password2 = reader["UserPassword"].ToString();
                     string firstName = "";
-                    if(reader["UserPassword"] != null)
+                    if (reader["UserPassword"] != null)
                     {
                         firstName = reader["FirstName"].ToString();
                     }
-                    
-                    string lastName = "";  
-                    if(reader["LastName"] != null)
+
+                    string lastName = "";
+                    if (reader["LastName"] != null)
                     {
                         lastName = reader["LastName"].ToString();
                     }
                     string fullName = firstName + ' ' + lastName;
                     userId2 = userId2.Trim();
                     inputUserId = inputUserId.Trim();
-                    if(String.Equals(inputUserId, userId2 ))
+                    if (String.Equals(inputUserId, userId2))
                     {
                         inputUserPassword = inputUserPassword.Trim();
                         password2 = password2.Trim();
-                        if(String.Equals( inputUserPassword , password2))
+                        if (String.Equals(inputUserPassword, password2))
                         {
                             result = true;
                             //User temp = new User();
@@ -122,7 +131,7 @@ namespace PapaDarioPizzaApp.Pages
                             //Opens up Order Page
                             //Frame.Navigate(typeof(OrderPage));
                             //Frame.Navigate(typeof(CustomerPage));
-                            Frame.Navigate(typeof(WelcomePage));
+                            Frame.Navigate(typeof(Pages.OrderPage));
 
                             break;
                         }
@@ -149,7 +158,7 @@ namespace PapaDarioPizzaApp.Pages
                 //    messageDialog = new MessageDialog(message, caption);
                 //    await messageDialog.ShowAsync();
                 //}
-                
+
             }
             catch (Exception ex)
             {
@@ -165,20 +174,10 @@ namespace PapaDarioPizzaApp.Pages
                 conn.Close();
             }
         }
-        public static void ButtonContentChange(CustomerPage page)
+
+        private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {
-            //page.AccessibleTextBlock.Text = "Accessed";
-            page.btnLogIn.Content = "Lot Out";
+            Frame.Navigate(typeof(Pages.SignUpPage));
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            tbUserId.Focus(FocusState.Programmatic);
-        }
-
-        //private void btnLogIn_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
     }
 }
