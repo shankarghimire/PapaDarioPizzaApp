@@ -479,10 +479,12 @@ namespace PapaDarioPizzaApp.Pages
                 if (chkDelivery.IsChecked == true)
                 {
                     temp.IsDelivery = "Yes";
+                    temp.DeliveryAddress = tbDeliveryAddress.Text;
                 }
                 else
                 {
                     temp.IsDelivery = "No";
+                    temp.DeliveryAddress = "";
                 }
                 //temp.CustomerId = Convert.ToInt32( tbCustomerId.Text);
                 temp.PhoneNumber = tbPhoneNumber.Text;
