@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using System.Data.SqlClient;
+using Windows.UI.Popups;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -135,11 +136,38 @@ namespace PapaDarioPizzaApp
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }                    
+        }
+        private async void ValidateInput()
+        {
+            try
+            {
+                if (tbUserName.Text == "")
+                {
+                    string message = "UserId cannot be empty!, Please, try again!";
+                    string caption = "Validation Error!";
+                    MessageDialog messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    tbUserName.Focus(FocusState.Programmatic);
+                    return;
+
+                }
+                if (pswPassword.Password == "")
+                {
+                    string message = "Password box cannot be empty!, Please, try again!";
+                    string caption = "Validation Error!";
+                    MessageDialog messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    pswPassword.Focus(FocusState.Programmatic);
+                    return;
+
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             
-
-            
-
         }
 
         private bool CheckLogInCredential(string userName, string userPassword)
