@@ -1921,54 +1921,55 @@ namespace PapaDarioPizzaApp.Pages
 
         private async void btnPrintBill_Click(object sender, RoutedEventArgs e)
         {
+            string fileName = @"C:/Receipt.txt";         
             try
-            {
-                // Create sample file; replace if exists.
-                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-                StorageFile sampleFile = await storageFolder.CreateFileAsync("sample.txt",
-                   CreationCollisionOption.ReplaceExisting);
+            {                           
+                if(pizzaOrderList.Count > 0)
+                {
+                    if (File.Exists(fileName))
+                    {
+                        File.Delete(fileName);
+                    }
+                    using(StreamWriter sw = File.CreateText(fileName))
+                    {
+                        string receiptContent = "";
+                        string receiptHeader = "";
+                        string amountInfo = "";
+                        PizzaOrder firstRecord = pizzaOrderList[0];
+                        receiptHeader = "Order Number: " + firstRecord.OrderNumber + "\nOrderDate:" + firstRecord.OrderDate + "\nCustomer Id: " + firstRecord.CustomerId + "\nCustomer Name:" + firstRecord.CustomerName + "\n";
 
+                        sw.WriteLine(receiptHeader);
+                        foreach (PizzaOrder order in pizzaOrderList)
+                        {
+                            receiptContent = order.SerialNumber + "," + order.Size + ", " + order.Toppings + ", " + order.Price + "\n";
+                        }
+                        sw.WriteLine(receiptContent);
 
-                storageFolder = ApplicationData.Current.LocalFolder;
-                sampleFile = await storageFolder.GetFileAsync("sample.txt");
+                        amountInfo = "Total Amount : " + totalAmount.ToString() + "\n Discount Amount :" + discountAmount + "\nGrand Total :" + grandTotalAmount + "\n";
 
-                await FileIO.WriteTextAsync(sampleFile, "Shankar Ghimire Shankar Ghimire Shankar Ghimire");
-                //Frame.Navigate(typeof(Pages.ReceiptPage));
+                        sw.WriteLine(amountInfo);
 
-                //////////////////////////////////////////
-                ///
-                //string path = @"Assets";
-                //StorageFolder storageFolder = await StorageFolder.
-                //string sFileName = @"Assets/Receipt.txt";
-                //Uri uri = new Uri(this.BaseUri, sFileName);
-                //StorageFile file = await StorageFile.CreateStreamedFileFromUriAsync("Receipt.txt", uri, Windows.Storage.Streams.RandomAccessStreamReference.CreateFromUri(uri));
-                //await FileIO.WriteTextAsync(file, "Shankr Ghimire");
-
-
-
-
-
-                ///////////////////
-                //var dirName = "TestFolder";
-                //Directory.CreateDirectory(dirName);
-
-                //string filePath = @"Assets/Receipt.txt";
-                //string content = "My Name is Shankar";
-                //File.WriteAllText(filePath, content);
-                //string[] data = File.ReadAllLines(filePath).ToArray();
-                //string message = "";
-                //foreach(string s in data)
-                //{
-                //    message += s;
-                //}
-                //messageDialog = new MessageDialog(message, "bill");
-                //await messageDialog.ShowAsync();
-
+                        //File.WriteAllText(fileName, receiptContent);
+                        //string[] data = File.ReadAllLines(fileName).ToArray();
+                        //string message = "";
+                        //foreach (string s in data)
+                        //{
+                        //    message += s;
+                        //}
+                        //messageDialog = new MessageDialog(message, "bill");
+                        //await messageDialog.ShowAsync();
+                    }
+                }              
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                string message = ex.Message.ToString();
+                string caption = "Error Message";
+                messageDialog = new MessageDialog(message, caption);
+                await messageDialog.ShowAsync();
             }
+           
            
         }
     }
