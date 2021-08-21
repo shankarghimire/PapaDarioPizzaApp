@@ -1447,6 +1447,7 @@ namespace PapaDarioPizzaApp.Pages
                     orderUpdate.Toppings += " Broccoli";
                 }
 
+                orderUpdate.Price = currentPizzaPrice;
                 //clear Data Grid View
                 dataGridViewOrder.ItemsSource = null;
                 dataGridViewOrder.ItemsSource = pizzaOrderList;
