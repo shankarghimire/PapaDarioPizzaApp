@@ -115,10 +115,31 @@ namespace PapaDarioPizzaApp
            
         }
 
-        private void btnLoginAdmin_Click(object sender, RoutedEventArgs e)
+        private async void btnLoginAdmin_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                //ValidateInput();
+                if (tbUserName.Text == "")
+                {
+                    string message = "UserId cannot be empty!, Please, try again!";
+                    string caption = "Validation Error!";
+                    MessageDialog messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    tbUserName.Focus(FocusState.Programmatic);
+                    return;
+
+                }
+                if (pswPassword.Password == "")
+                {
+                    string message = "Password box cannot be empty!, Please, try again!";
+                    string caption = "Validation Error!";
+                    MessageDialog messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    pswPassword.Focus(FocusState.Programmatic);
+                    return;
+
+                }
                 string userName = tbUserName.Text;
                 //string storedPassword = "12345";
                 string inputPassword = pswPassword.Password.ToString();
