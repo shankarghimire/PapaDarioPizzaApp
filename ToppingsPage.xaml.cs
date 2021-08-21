@@ -34,9 +34,17 @@ namespace PapaDarioPizzaApp
 
         public ToppingsPage()
         {
-            this.InitializeComponent();
-            topping = new Topping();
-            ToppingList = new List<Topping>();
+            try
+            {
+                this.InitializeComponent();
+                topping = new Topping();
+                ToppingList = new List<Topping>();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
 
@@ -329,7 +337,15 @@ namespace PapaDarioPizzaApp
         }
         private void btnRefrsh_Click(object sender, RoutedEventArgs e)
         {
-            LoadDataToDataGrid();
+            try
+            {
+                LoadDataToDataGrid();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -23,33 +23,56 @@ namespace PapaDarioPizzaApp
         }
         public static User GetLoggedInUser(string userId, string userName)
         {
+            try
+            {
+                UserId = userId;
+                UserName = userName;
+                LoginStatus = true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             //User user = new User();
             //LoggedInUser.UserId = userId;
             //LoggedInUser.UserName = userName;
-            UserId = userId;
-            UserName = userName;
-            LoginStatus = true;
+           
             return LoggedInUser;
         }
         public static User DefaultUserInfo()
         {
-            UserId = "Guest";
-            UserName = "Guest";
-            LoginStatus = false;
+            try
+            {
+                UserId = "Guest";
+                UserName = "Guest";
+                LoginStatus = false;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
             return LoggedInUser;
         }
 
         public static void ChangeToLogOut(CustomerPage page)
         {
+            try
+            {
+                if (LoginStatus == true)
+                {
+                    page.btnLogIn.Content = "Lot Out";
+                }
+                else
+                {
+                    page.btnLogIn.Content = "Lot In";
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             
-            if (LoginStatus == true)
-            {
-                page.btnLogIn.Content = "Lot Out";
-            }
-            else
-            {
-                page.btnLogIn.Content = "Lot In";
-            }
         }
     }
 }

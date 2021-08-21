@@ -39,18 +39,41 @@ namespace PapaDarioPizzaApp
 
         private void btnGotoHome_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage));
+            try
+            {
+                Frame.Navigate(typeof(MainPage));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
         {
-            frameCustomerPage.Navigate(typeof(Pages.OrderPage));
+            try
+            {
+                frameCustomerPage.Navigate(typeof(Pages.OrderPage));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
-           
-            frameCustomerPage.Navigate(typeof(WelcomePage));
+            try
+            {
+                frameCustomerPage.Navigate(typeof(WelcomePage));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         //private void btnSignUp_Click(object sender, RoutedEventArgs e)
@@ -60,14 +83,22 @@ namespace PapaDarioPizzaApp
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(UserInfo.LoginStatus == true)
+            try
             {
-                this.btnLogIn.Content = "Log Out";
+                if (UserInfo.LoginStatus == true)
+                {
+                    this.btnLogIn.Content = "Log Out";
+                }
+                else
+                {
+                    this.btnLogIn.Content = "Log In";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.btnLogIn.Content = "Log In";
+                Console.WriteLine(ex.Message);
             }
+           
         }
 
         //private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)

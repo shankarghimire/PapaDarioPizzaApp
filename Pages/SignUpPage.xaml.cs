@@ -32,65 +32,81 @@ namespace PapaDarioPizzaApp.Pages
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            ValidateUserInput();
+            try
+            {
+                ValidateUserInput();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
         private async void ValidateUserInput()
         {
-            if(tbUserId.Text == "")
+            try
             {
-                string message = "User Id field cannot be blank!";
-                string caption = "Data Validation Error!";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                tbUserId.Focus(FocusState.Programmatic);
-                return;
+                if (tbUserId.Text == "")
+                {
+                    string message = "User Id field cannot be blank!";
+                    string caption = "Data Validation Error!";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    tbUserId.Focus(FocusState.Programmatic);
+                    return;
+                }
+                if (pbPassword.Password == "")
+                {
+                    string message = "Password field cannot be blank!";
+                    string caption = "Data Validation Error!";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    //pbPassword.Focus(FocusState.Programmatic);
+                    return;
+                }
+                if (pbConfirmPassword.Password == "")
+                {
+                    string message = "Confirm Password field cannot be blank!";
+                    string caption = "Data Validation Error!";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    //pbConfirmPassword.Focus(FocusState.Programmatic);
+                    return;
+                }
+                if (pbConfirmPassword.Password != pbPassword.Password)
+                {
+                    string message = "Confirm Password does not match with Pasword!";
+                    string caption = "Data Validation Error!";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    //pbConfirmPassword.Focus(FocusState.Programmatic);
+                    return;
+                }
+                if (tbFirstName.Text == "")
+                {
+                    string message = "First Name field cannot be blank!";
+                    string caption = "Data Validation Error!";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    //tbFirstName.Focus(FocusState.Programmatic);
+                    return;
+                }
+                if (tbLastName.Text == "")
+                {
+                    string message = "Last Name field cannot be blank!";
+                    string caption = "Data Validation Error!";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    //tbLastName.Focus(FocusState.Programmatic);
+                    return;
+                }
+                InsertCursomerRecord();
             }
-            if (pbPassword.Password == "")
+            catch (Exception ex)
             {
-                string message = "Password field cannot be blank!";
-                string caption = "Data Validation Error!";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                //pbPassword.Focus(FocusState.Programmatic);
-                return;
+                Console.WriteLine(ex.Message);
             }
-            if (pbConfirmPassword.Password == "")
-            {
-                string message = "Confirm Password field cannot be blank!";
-                string caption = "Data Validation Error!";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                //pbConfirmPassword.Focus(FocusState.Programmatic);
-                return;
-            }
-            if (pbConfirmPassword.Password != pbPassword.Password)
-            {
-                string message = "Confirm Password does not match with Pasword!";
-                string caption = "Data Validation Error!";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                //pbConfirmPassword.Focus(FocusState.Programmatic);
-                return;
-            }
-            if (tbFirstName.Text == "")
-            {
-                string message = "First Name field cannot be blank!";
-                string caption = "Data Validation Error!";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                //tbFirstName.Focus(FocusState.Programmatic);
-                return;
-            }
-            if (tbLastName.Text == "")
-            {
-                string message = "Last Name field cannot be blank!";
-                string caption = "Data Validation Error!";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                //tbLastName.Focus(FocusState.Programmatic);
-                return;
-            }
-            InsertCursomerRecord();
+            
 
         }
         private async void InsertCursomerRecord()
@@ -163,7 +179,15 @@ namespace PapaDarioPizzaApp.Pages
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(WelcomePage));
+            try
+            {
+                Frame.Navigate(typeof(WelcomePage));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         private async void tbUserId_LostFocus(object sender, RoutedEventArgs e)
@@ -205,7 +229,15 @@ namespace PapaDarioPizzaApp.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            tbUserId.Focus(FocusState.Programmatic);
+            try
+            {
+                tbUserId.Focus(FocusState.Programmatic);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         

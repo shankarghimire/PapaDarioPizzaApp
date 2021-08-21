@@ -10,7 +10,15 @@ namespace PapaDarioPizzaApp
     {
         public static void ChangeToLogOutButton(CustomerPage customerPage)
         {
-            customerPage.btnLogIn.Content = "Log Out";
+            try
+            {
+                customerPage.btnLogIn.Content = "Log Out";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
     }
 }

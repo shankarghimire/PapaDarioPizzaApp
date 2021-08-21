@@ -16,10 +16,18 @@ namespace PapaDarioPizzaApp
         public OrderDetails() { }
         public OrderDetails(int sn,int orderid, string pizzaSize, string toppings)
         {
-            this.SN = sn;
-            this.OrderId = orderid;
-            this.PizzaSize = pizzaSize;
-            this.Toppings = toppings;
+            try
+            {
+                this.SN = sn;
+                this.OrderId = orderid;
+                this.PizzaSize = pizzaSize;
+                this.Toppings = toppings;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
     }

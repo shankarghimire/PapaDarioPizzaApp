@@ -38,64 +38,105 @@ namespace PapaDarioPizzaApp
 
         private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
         {
-            EnableDisableUI();
+            try
+            {
+                EnableDisableUI();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
         private void chkLogInAsAdmin_Click(object sender, RoutedEventArgs e)
         {
-            EnableDisableUI();
-            tbUserName.Focus(FocusState.Programmatic);
+            try
+            {
+                EnableDisableUI();
+                tbUserName.Focus(FocusState.Programmatic);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
         private void EnableDisableUI()
         {
-            if (chkLogInAsAdmin.IsChecked == true)
+            try
             {
-                //Disable Guest section
-                //TextBlock_loginAsCustomer.Foreground = new System.Windows.Media.SolidColorBrush(Colors.Navy);
-                //TextBlock_loginAsCustomer.Foreground = Color
-                btnLoginGuest.IsEnabled = false;
-                btnCancel1.IsEnabled = false;
-                //Enable Admin Section
-                tbUserName.IsEnabled = true;
-                pswPassword.IsEnabled = true;
-                btnLoginAdmin.IsEnabled = true;
-                btnCancel2.IsEnabled = true;
+                if (chkLogInAsAdmin.IsChecked == true)
+                {
+                    //Disable Guest section
+                    //TextBlock_loginAsCustomer.Foreground = new System.Windows.Media.SolidColorBrush(Colors.Navy);
+                    //TextBlock_loginAsCustomer.Foreground = Color
+                    btnLoginGuest.IsEnabled = false;
+                    btnCancel1.IsEnabled = false;
+                    //Enable Admin Section
+                    tbUserName.IsEnabled = true;
+                    pswPassword.IsEnabled = true;
+                    btnLoginAdmin.IsEnabled = true;
+                    btnCancel2.IsEnabled = true;
+                }
+                else
+                {
+                    //Enable Gues Section
+                    btnLoginGuest.IsEnabled = true;
+                    btnCancel1.IsEnabled = true;
+                    //Disable Admin Section
+                    tbUserName.IsEnabled = false;
+                    pswPassword.IsEnabled = false;
+                    btnLoginAdmin.IsEnabled = false;
+                    btnCancel2.IsEnabled = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //Enable Gues Section
-                btnLoginGuest.IsEnabled = true;
-                btnCancel1.IsEnabled = true;
-                //Disable Admin Section
-                tbUserName.IsEnabled = false;
-                pswPassword.IsEnabled = false;
-                btnLoginAdmin.IsEnabled = false;
-                btnCancel2.IsEnabled = false;
+                Console.WriteLine(ex.Message);
             }
+
+            
         }
 
         private void btnLoginGuest_Click(object sender, RoutedEventArgs e)
         {
-            //Frame.Navigate(typeof(CustomerPage));
-            Frame.Navigate(typeof(WelcomePage));
+            try
+            {
+                //Frame.Navigate(typeof(CustomerPage));
+                Frame.Navigate(typeof(WelcomePage));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
         private void btnLoginAdmin_Click(object sender, RoutedEventArgs e)
         {
-            string userName = tbUserName.Text;
-            //string storedPassword = "12345";
-            string inputPassword = pswPassword.Password.ToString();
-            bool result = CheckLogInCredential( userName,  inputPassword);
-            if (result == true)
+            try
             {
-                Frame.Navigate(typeof(AdminPage));
+                string userName = tbUserName.Text;
+                //string storedPassword = "12345";
+                string inputPassword = pswPassword.Password.ToString();
+                bool result = CheckLogInCredential(userName, inputPassword);
+                if (result == true)
+                {
+                    Frame.Navigate(typeof(AdminPage));
+                }
+                else
+                {
+                    TextBloxk_loginFailureMessage.Text = "Inalid User Name or Password!";
+                    //pswPassword.ClearValue();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                TextBloxk_loginFailureMessage.Text = "Inalid User Name or Password!";
-                //pswPassword.ClearValue();
+                Console.WriteLine(ex.Message);
             }
+            
 
             
 
@@ -160,12 +201,28 @@ namespace PapaDarioPizzaApp
 
         private void btnCancel2_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Exit();
+            try
+            {
+                Application.Current.Exit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
         private void btnCancel1_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Exit();
+            try
+            {
+                Application.Current.Exit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
         //private void btnCheck_Click(object sender, RoutedEventArgs e)

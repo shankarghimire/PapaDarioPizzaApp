@@ -433,7 +433,7 @@
                     Foreground="White"
                     FontWeight="Bold"
                     CornerRadius="5"
-                    Margin="10,0,10,0"/>
+                    Margin="10,0,10,0" Click="btnPrintBill_Click"/>
             <Button x:Name="btnNewOrder"
                     Content="New Order"
                     Background="blue"

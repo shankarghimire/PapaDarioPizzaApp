@@ -32,45 +32,83 @@ namespace PapaDarioPizzaApp
 
         private void btnGoToOrderPage_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CustomerPage));
+            try
+            {
+                Frame.Navigate(typeof(CustomerPage));
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+           
         }
 
         private void btnContinueAsGuest_Click(object sender, RoutedEventArgs e)
         {
-            UserInfo.DefaultUserInfo();
-            Frame.Navigate(typeof(Pages.OrderPage));
+            try
+            {
+                UserInfo.DefaultUserInfo();
+                Frame.Navigate(typeof(Pages.OrderPage));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+           
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                Frame.Navigate(typeof(MainPage));
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            ValidateUserInput();
-            CheckUserCredentials();
+            try
+            {
+                ValidateUserInput();
+                CheckUserCredentials();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+           
         }
         private async void ValidateUserInput()
         {
-            if (tbUserId.Text == "")
+            try
             {
-                string message = "User Id field cannot be blank!";
-                string caption = "Data Validation Error!";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                tbUserId.Focus(FocusState.Programmatic);
-                return;
+                if (tbUserId.Text == "")
+                {
+                    string message = "User Id field cannot be blank!";
+                    string caption = "Data Validation Error!";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    tbUserId.Focus(FocusState.Programmatic);
+                    return;
+                }
+                if (pbPassword.Password == "")
+                {
+                    string message = "Password field cannot be blank!";
+                    string caption = "Data Validation Error!";
+                    messageDialog = new MessageDialog(message, caption);
+                    await messageDialog.ShowAsync();
+                    //pbPassword.Focus(FocusState.Programmatic);
+                    return;
+                }
             }
-            if (pbPassword.Password == "")
+            catch (Exception ex)
             {
-                string message = "Password field cannot be blank!";
-                string caption = "Data Validation Error!";
-                messageDialog = new MessageDialog(message, caption);
-                await messageDialog.ShowAsync();
-                //pbPassword.Focus(FocusState.Programmatic);
-                return;
+                Console.WriteLine(ex.Message.ToString());
             }
+            
         }
 
         private async void CheckUserCredentials()
@@ -83,7 +121,7 @@ namespace PapaDarioPizzaApp
             SqlCommand cmd = new SqlCommand(query, conn);
             try
             {
-                bool result = false;
+                //bool result = false;
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -111,7 +149,7 @@ namespace PapaDarioPizzaApp
                         password2 = password2.Trim();
                         if (String.Equals(inputUserPassword, password2))
                         {
-                            result = true;
+                            //result = true;
                             //User temp = new User();
                             //temp.UserId = tbUserId.Text;
                             string name = firstName + ' ' + lastName;
@@ -177,7 +215,15 @@ namespace PapaDarioPizzaApp
 
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Pages.SignUpPage));
+            try
+            {
+                Frame.Navigate(typeof(Pages.SignUpPage));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+           
         }
     }
 }

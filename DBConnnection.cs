@@ -14,6 +14,7 @@ namespace PapaDarioPizzaApp
         private static string connectionString = "Springn2021ExamDB";
         public static string GetConnectionString()
         {
+           
             ConfigurationBuilder cb = new ConfigurationBuilder();
             cb.SetBasePath(Directory.GetCurrentDirectory());
             cb.AddJsonFile("config.json");

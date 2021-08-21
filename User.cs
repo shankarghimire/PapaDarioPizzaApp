@@ -16,9 +16,17 @@ namespace PapaDarioPizzaApp
         public User() { }
         public User(string userId, string userName, string userPassword)
         {
-            this.UserId = userId;
-            this.UserName = userName;
-            this.UserPassword = userPassword;
+            try
+            {
+                this.UserId = userId;
+                this.UserName = userName;
+                this.UserPassword = userPassword;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
     }
 }

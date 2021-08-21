@@ -34,9 +34,17 @@ namespace PapaDarioPizzaApp
 
         public PizzaSizePage()
         {
-            this.InitializeComponent();
-            pizza = new Pizza();
-            PizzaList = new List<Pizza>();
+            try
+            {
+                this.InitializeComponent();
+                pizza = new Pizza();
+                PizzaList = new List<Pizza>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

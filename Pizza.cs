@@ -18,10 +18,18 @@ namespace PapaDarioPizzaApp
         }
         public Pizza(int id, string pizzaSize, string description, double price)
         {
-            this.ID = id;
-            this.PizzaSize = pizzaSize;
-            this.Description = description;
-            this.Price = price;
+            try
+            {
+                this.ID = id;
+                this.PizzaSize = pizzaSize;
+                this.Description = description;
+                this.Price = price;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 }

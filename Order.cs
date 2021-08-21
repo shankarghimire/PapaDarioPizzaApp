@@ -20,15 +20,23 @@ namespace PapaDarioPizzaApp
         public Order() { }
         public Order(int orderId,DateTime orderDate, string customerId,string phoneNumber, string isDelivery, string deliveryAddress, double totalPrice, double discount, double grandTotal)
         {
-            this.OrderId = orderId;
-            this.OrderDate = orderDate;
-            this.CustomerId = customerId;
-            this.PhoneNumber = phoneNumber;
-            this.IsDelivery = isDelivery;
-            this.DeliveryAddress = deliveryAddress;
-            this.TotalPrice = totalPrice;
-            this.Discount = discount;
-            this.GrandTotal = grandTotal;
+            try
+            {
+                this.OrderId = orderId;
+                this.OrderDate = orderDate;
+                this.CustomerId = customerId;
+                this.PhoneNumber = phoneNumber;
+                this.IsDelivery = isDelivery;
+                this.DeliveryAddress = deliveryAddress;
+                this.TotalPrice = totalPrice;
+                this.Discount = discount;
+                this.GrandTotal = grandTotal;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 }

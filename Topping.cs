@@ -18,10 +18,18 @@ namespace PapaDarioPizzaApp
         }
         public Topping(int id, string toppingName, string toppingDescription, double toppingPrice)
         {
-            this.ID = id;
-            this.ToppingName = toppingName;
-            this.ToppingDescription = toppingDescription;
-            this.ToppingPrice = toppingPrice;
+            try
+            {
+                this.ID = id;
+                this.ToppingName = toppingName;
+                this.ToppingDescription = toppingDescription;
+                this.ToppingPrice = toppingPrice;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
     }
 }
