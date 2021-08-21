@@ -61,21 +61,16 @@ namespace PapaDarioPizzaApp.Pages
 
             sizeDictionary = new Dictionary<string, double>();
             toppingDictionary = new Dictionary<string, double>();
-
-
         }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-
                 tbCustomerId.IsEnabled = false;
                 tbCustomerName.IsEnabled = false;
                 tbDeliveryAddress.IsEnabled = false;
 
                 this.PizzaOrderDate.Date = DateTime.Now;
-
 
                 DisableUIElements();
                 LoadPizzaRate();
@@ -682,10 +677,10 @@ namespace PapaDarioPizzaApp.Pages
                     string toppingName = reader["ToppingName"].ToString();
                     string description = "";
 
-                    if (!reader.IsDBNull(2))
-                    {
-                        description = reader["Description"].ToString();
-                    }
+                    //if (!reader.IsDBNull(2))
+                    //{
+                    //    description = reader["Description"].ToString();
+                    //}
 
                   
                     double price = Convert.ToDouble(reader["Price"]);
